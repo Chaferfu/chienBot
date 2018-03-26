@@ -19,6 +19,29 @@ def read_word_list_file(filename):
             wordlist.append(word)
     return wordlist
 
+#renvoie les mots & réponses contenue dans le fichier
+def stockWordsAndQuestions(filename):
+    dictThemes = {}
+    theme 
+    mots = []
+    questions = []
+    with open(filename, "r") as filepointer:
+        for line in file.readlines():
+            word = line.split(" ")
+            while word[0] != '@'
+                if word[0] == '£'
+                    theme = word[0]
+                else
+                    mots.append(word)
+                line = file.readlines()
+                word = line.split(" ")
+
+            word = line.split(" ")
+            while word[0] != '$'
+                questions.append(word)
+                line = file.readlines()
+                word = line.split(" ")
+
 #Renvoie une reponse plutot nulle et non constructive
 def reponseNulle(tabMots):
 
