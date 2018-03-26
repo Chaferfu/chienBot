@@ -2,7 +2,16 @@ from random import randint, uniform
 from time import sleep
 
 def mathias():
+	repliques = []
+	repliques.append("Waf! ")
+	repliques.append("Wuf! ")
+	repliques.append("Wef! ")
+	repliques.append("Wif! ")
+	repliques.append("Wof! ")
+	repliques.append("Wouf! ")
+	repliques.append("Wigrecf! ")
 	while True:
+
 		text = input("Moi   : ")
 		sleep(uniform(0.5,1.5))
 		print("Calou : " + repliques[randint(0,6)])
@@ -27,14 +36,7 @@ def reponseNulle(tabMots):
 
 	return text
 
-repliques = []
-repliques.append("Waf! ")
-repliques.append("Wuf! ")
-repliques.append("Wef! ")
-repliques.append("Wif! ")
-repliques.append("Wof! ")
-repliques.append("Wouf! ")
-repliques.append("Wigrecf! ")
+
   
 while True:
 
