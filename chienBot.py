@@ -3,18 +3,12 @@ from time import sleep
 
 def mathias():
 	repliques = []
-	repliques.append("Waf! ")
-	repliques.append("Wuf! ")
-	repliques.append("Wef! ")
-	repliques.append("Wif! ")
-	repliques.append("Wof! ")
-	repliques.append("Wouf! ")
-	repliques.append("Wigrecf! ")
+	repliques = read_word_list_file("mode0")
 	while True:
 
 		text = input("Moi   : ")
 		sleep(uniform(0.5,1.5))
-		print("Calou : " + repliques[randint(0,6)])
+		print("Calou : " + reponseNulle(repliques))
 
 def read_word_list_file(filename):
     wordlist = []
@@ -28,7 +22,7 @@ def read_word_list_file(filename):
 #Renvoie une reponse plutot nulle et non constructive
 def reponseNulle(tabMots):
 
-	rng = randint(1,2)
+	rng = randint(1,3)
 	text = ""
 
 	for i in range(rng):
@@ -37,24 +31,12 @@ def reponseNulle(tabMots):
 	return text
 
 
-  
-while True:
-
-	
-	text = input("Moi    : ")
-	sleep(uniform(0.5,1.5))
-	print("Toutou : " + reponseNulle(repliques))
-
-
-
-
-
 if __name__=="__main__":
 	mode = "-1"
 	while ((int(mode) < 0) or (int(mode) > 3)): 
 		mode = input();
 	{
-		0 : "Mode 0",
+		0 : mathias(),
 		1 : "Mode 1",
 		2 : "Mode 2",
 		3 : "Mode 3"
