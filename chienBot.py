@@ -4,11 +4,20 @@ from time import sleep
 def mathias():
 	repliques = []
 	repliques = read_word_list_file("mode0")
+	derniere = ""
+
 	while True:
 
 		text = input("Moi   : ")
 		sleep(uniform(0.5,1.5))
-		print("Calou : " + reponseNulle(repliques))
+		reponse = reponseNulle(repliques)
+		while reponse == derniere:
+			reponse = reponseNulle(repliques)
+
+
+		print("Calou : " + reponse)
+		derniere = reponse
+
 
 def read_word_list_file(filename):
     wordlist = []
@@ -27,7 +36,7 @@ def reponseNulle(tabMots):
 
 	for i in range(rng):
 		text += tabMots[randint(0,len(tabMots) - 1)]
-
+		text += " "
 	return text
 
 
