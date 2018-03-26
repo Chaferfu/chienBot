@@ -9,14 +9,27 @@ def mathias():
 	while True:
 
 		text = input("Moi   : ")
+		jeDis = text.split(" ")
+
+		triggered = False
+
+		for mot in jeDis:
+			if mot == "Calou" or mot == "calou":
+				triggered = True
+
 		sleep(uniform(0.5,1.5))
-		reponse = reponseNulle(repliques)
-		while reponse == derniere:
+
+		if triggered:
+			print("Calou : " + "Oui, c'est moi.")
+		else:
+
 			reponse = reponseNulle(repliques)
+			while reponse == derniere:
+				reponse = reponseNulle(repliques)
 
 
-		print("Calou : " + reponse)
-		derniere = reponse
+			print("Calou : " + reponse)
+			derniere = reponse
 
 
 def read_word_list_file(filename):
