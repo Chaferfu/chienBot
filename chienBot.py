@@ -2,24 +2,30 @@ from random import randint, uniform
 from time import sleep
 
 def mathias():
-	repliques = []
+	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("mode0")
 	derniere = ""
+	triggered = False
 
 	while True:
 
 		text = input("Moi   : ")
 		jeDis = text.split(" ")
 
-		triggered = False
+		nomPrononce = False
 
 		for mot in jeDis:
 			if mot == "Calou" or mot == "calou":
+				nomPrononce = True
+
+		for mot in jeDis:
+			if mot in motsCles:
 				triggered = True
+
 
 		sleep(uniform(0.5,1.5))
 
-		if triggered:
+		if nomPrononce:
 			print("Calou : " + "Oui, c'est moi.")
 		else:
 
@@ -27,6 +33,8 @@ def mathias():
 			while reponse == derniere:
 				reponse = reponseNulle(repliques)
 
+			if triggered:
+				reponse = reponse.upper()
 
 			print("Calou : " + reponse)
 			derniere = reponse
