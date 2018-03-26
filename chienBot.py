@@ -1,6 +1,23 @@
 from random import randint, uniform
 from time import sleep
 
+def read_word_list_file(filename):
+    wordlist = []
+    with open(filename, "r") as filepointer:
+        for line in filepointer.readlines():
+            word = line.strip()
+            if word=="": continue
+            wordlist.append(word)
+    return wordlist
+
+def read_word_list_file(filename):
+    wordlist = []
+    with open(filename, "r") as filepointer:
+        for line in filepointer.readlines():
+            word = line.strip()
+            if word=="": continue
+            wordlist.append(word)
+    return wordlist
 
 repliques = []
 repliques.append("Waf!")
