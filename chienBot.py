@@ -10,7 +10,6 @@ repliques.append("Wif!")
 repliques.append("Wof!")
 repliques.append("Wouf!")
 repliques.append("Wigrecf!")
-<<<<<<< HEAD
 
 if __name__=="__main__":
 	mode = "-1"
@@ -22,7 +21,6 @@ if __name__=="__main__":
 		2 : "Mode 2",
 		3 : "Mode 3"
 	}[int(mode)]
-=======
 
 def mathias():
 	while True:
