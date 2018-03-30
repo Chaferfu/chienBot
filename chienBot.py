@@ -117,7 +117,8 @@ def reaction(dictThemes, theme, mot):
 	print(message)
 
 def testMathias():
-
+def testNathan():
+def testBrian():
 
 if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
@@ -141,6 +142,10 @@ if __name__=="__main__":
 			mode3();
 		elif(int(mode) == 4):
 			testMathias();
+		elif(int(mode) == 5):
+			testNathan();
+		elif(int(mode) == 6):
+			testBrian();
 		else:
 			break;
 		mode = "-1"
