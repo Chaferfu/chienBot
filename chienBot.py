@@ -4,6 +4,7 @@ from time import sleep
 def mathias():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("mode0")
+	repliquesRares = read_word_list_file("mode1")
 	derniere = ""
 	triggered = False
 
@@ -13,11 +14,11 @@ def mathias():
 		text = input("Moi   : ")
 		jeDis = text.split(" ")
 
-		nomPrononce = False
+		isNomPrononce = False
 
 		for mot in jeDis:
 			if mot == "Calou" or mot == "calou":
-				nomPrononce = True
+				isNomPrononce = True
 
 		for mot in jeDis:
 			if mot in motsCles:
@@ -26,13 +27,13 @@ def mathias():
 
 		sleep(uniform(0.5,1.5))
 
-		if nomPrononce:
+		if isNomPrononce:
 			print("Calou : " + "Oui, c'est moi.")
 		else:
 
-			reponse = reponseNulle(repliques)
+			reponse = reponseNulle(repliques, repliquesRares)
 			while reponse == derniere:
-				reponse = reponseNulle(repliques)
+				reponse = reponseNulle(repliques, repliquesRares)
 
 			if triggered:
 				reponse = reponse.upper()
@@ -81,14 +82,21 @@ def continuer(text):
 	return True
 
 #Renvoie une reponse plutot nulle et non constructive
-def reponseNulle(tabMots):
+def reponseNulle(tabMots, tabMotsrares):
 
 	rng = randint(1,3)
 	text = ""
 
 	for i in range(rng):
-		text += tabMots[randint(0,len(tabMots) - 1)]
-		text += " "
+		
+		if uniform(0,1) < 0.9:
+			text += tabMots[randint(0,len(tabMots) - 1)]
+			text += " "
+
+		else:
+			text += tabMotsrares[randint(0,len(tabMotsrares) - 1)]
+			text += " "
+
 	return text
 
 
