@@ -117,8 +117,11 @@ def reaction(dictThemes, theme, mot):
 	print(message)
 
 def testMathias():
+	return
 def testNathan():
+	return
 def testBrian():
+	return
 
 if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
