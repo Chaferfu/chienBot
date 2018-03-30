@@ -4,6 +4,7 @@ from time import sleep
 def mathias():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("mode0")
+	repliquesRares = read_word_list_file("mode1")
 	derniere = ""
 	triggered = False
 
@@ -13,11 +14,11 @@ def mathias():
 		text = input("Moi   : ")
 		jeDis = text.split(" ")
 
-		nomPrononce = False
+		isNomPrononce = False
 
 		for mot in jeDis:
 			if mot == "Calou" or mot == "calou":
-				nomPrononce = True
+				isNomPrononce = True
 
 		for mot in jeDis:
 			if mot in motsCles:
@@ -26,11 +27,12 @@ def mathias():
 
 		sleep(uniform(0.5,1.5))
 
-		if nomPrononce:
+		if isNomPrononce:
 			print("Calou : " + "Oui, c'est moi.")
 		else:
-
-			reponse = reponseNulle(repliques)
+			reponse = reponseNulle(repliques, repliquesRares)
+			while reponse == derniere:
+				reponse = reponseNulle(repliques, repliquesRares)
 
 			if triggered:
 				reponse = reponse.upper()
@@ -51,6 +53,7 @@ def read_word_list_file(filename):
 """
 #renvoie les mots & réponses contenues dans le fichier
 def stockWordsAndQuestions(filename):
+<<<<<<< HEAD
     dictThemes = {}
     
 	with open(filename, "r") as filepointer:
@@ -74,6 +77,30 @@ def stockWordsAndQuestions(filename):
 
     return dictThemes
 """
+=======
+	dictThemes = {}
+	key = ""
+	theme = ""
+	mots = []
+	questions = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer:
+			line = line.strip()
+			if line[0] in ['£','@']:
+				key = line[0]
+				if key == '£':
+					if theme != "":
+						mots.pop()
+						questions.pop()
+						dictThemes[theme] = (mots, questions)
+					theme = line[1:]				
+			elif(key == '£'):
+				mots.append(line)
+			elif(key == '@'):
+				questions.append(line)
+	return dictThemes
+
+>>>>>>> 68a47a2b0f64bb508a5fefc1d9970de51d4618c9
 def mode1():
 	print("mode 1")
 	return
@@ -93,13 +120,24 @@ def continuer(text):
 	return True
 
 #Renvoie une reponse plutot nulle et non constructive
+<<<<<<< HEAD
 def reponseNulle(tabMots):
+=======
+def reponseNulle(tabMots, tabMotsrares):
+
+>>>>>>> 68a47a2b0f64bb508a5fefc1d9970de51d4618c9
 	rng = randint(1,3)
 	text = ""
-
 	for i in range(rng):
-		text += tabMots[randint(0,len(tabMots) - 1)]
-		text += " "
+		
+		if uniform(0,1) < 0.9:
+			text += tabMots[randint(0,len(tabMots) - 1)]
+			text += " "
+
+		else:
+			text += tabMotsrares[randint(0,len(tabMotsrares) - 1)]
+			text += " "
+
 	return text
 
 # Cherche si un mot rentre par l'utilisateur figure dans le dictionnaire et 
@@ -121,13 +159,28 @@ def analyzeSentence(line, dico):
 	if(findTheme(word, dico) != "mot absent"):
 		nbOcc[key]++;
 
-if __name__=="__main__":
+def reaction(dictThemes, theme, mot):
+
+	rng = randint(0,len(dictThemes[theme][1])-1)
+	message = dictThemes[theme][1][rng]
+	print(message)
+
+def testMathias():
+	return
+def testNathan():
 	d = stockWordsAndQuestions("mode2")
-	for x in d:
-		print (x)
-		for y in d[x]
-			print(y, ':', d[x][y])
-			
+	for theme,valeur in d.items():
+		print(theme, " :")
+		for mot in valeur[0]:
+			print("mot :",mot)
+		for question in valeur[1]:
+			print("question :",question)
+	return
+def testBrian():
+	return
+
+if __name__=="__main__":
+	mode = "-1"
 	while(int(mode) != 4):
 		while ((int(mode) < 0) or (int(mode) > 4)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
@@ -139,6 +192,12 @@ if __name__=="__main__":
 			mode2();
 		elif(int(mode) == 3):
 			mode3();
+		elif(int(mode) == 4):
+			testMathias();
+		elif(int(mode) == 5):
+			testNathan();
+		elif(int(mode) == 6):
+			testBrian();
 		else:
 			break;
 		mode = "-1"
