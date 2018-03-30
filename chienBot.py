@@ -65,8 +65,8 @@ def stockWordsAndQuestions(filename):
 				key = line[0]
 				if key == '£':
 					if theme != "":
-						mots.pop()
-						questions.pop()
+						mots.clear()
+						questions.clear()
 						dictThemes[theme] = (mots, questions)
 					theme = line[1:]				
 			elif(key == '£'):
@@ -133,9 +133,9 @@ def testNathan():
 	for theme,valeur in d.items():
 		print(theme, " :")
 		for mot in valeur[0]:
-			print("mot :",mot)
+			print("mot :", mot)
 		for question in valeur[1]:
-			print("question :",question)
+			print("question :", question)
 	return
 def testBrian():
 	return
@@ -143,7 +143,7 @@ def testBrian():
 if __name__=="__main__":
 	mode = "-1"
 	while(int(mode) != 4):
-		while ((int(mode) < 0) or (int(mode) > 4)): 
+		while ((int(mode) < 0) or (int(mode) > 7)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
 		if(int(mode) == 0):
 			mathias();
