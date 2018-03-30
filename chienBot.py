@@ -33,6 +33,7 @@ def mathias():
 			reponse = reponseNulle(repliques, repliquesRares)
 			while reponse == derniere:
 				reponse = reponseNulle(repliques, repliquesRares)
+
 			if triggered:
 				reponse = reponse.upper()
 
@@ -52,28 +53,27 @@ def read_word_list_file(filename):
 
 #renvoie les mots & réponses contenues dans le fichier
 def stockWordsAndQuestions(filename):
-    dictThemes = {}
-    
-    with open(filename, "r") as filepointer:
-        for line in file.readlines():
-        	theme
-			mots = []
-			questions = []
-			while line != '@':
-            	if line == '£':
-                	line = file.readlines()
-                    theme = line
-                else:
-                    mots.append(line)
-                line = file.readlines()
-
-            line = file.readlines()
-            while line != '$':
-                questions.append(line)
-                line = file.readlines()
-            dictThemes[theme] = (mots, questions)
-
-    return dictThemes
+	dictThemes = {}
+	key = ""
+	theme = ""
+	mots = []
+	questions = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer:
+			line = line.strip()
+			if line[0] in ['£','@']:
+				key = line[0]
+				if key == '£':
+					if theme != "":
+						mots.pop()
+						questions.pop()
+						dictThemes[theme] = (mots, questions)
+					theme = line[1:]				
+			elif(key == '£'):
+				mots.append(line)
+			elif(key == '@'):
+				questions.append(line)
+	return dictThemes
 
 def mode1():
 	print("mode 1")
@@ -97,7 +97,6 @@ def reponseNulle(tabMots, tabMotsrares):
 
 	rng = randint(1,3)
 	text = ""
-
 	for i in range(rng):
 		
 		if uniform(0,1) < 0.9:
@@ -117,15 +116,18 @@ def reaction(dictThemes, theme, mot):
 	message = dictThemes[theme][1][rng]
 	print(message)
 
+def testMathias():
 
 
 if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
-	for x in d:
-		print (x)
-		for y in d[x]
-			print(y, ':', d[x][y])
-			
+	for theme,valeur in d.items():
+		print(theme, " :")
+		for mot in valeur[0]:
+			print("mot :",mot)
+		for question in valeur[1]:
+			print("question :",question)
+
 	while(int(mode) != 4):
 		while ((int(mode) < 0) or (int(mode) > 4)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
@@ -137,6 +139,8 @@ if __name__=="__main__":
 			mode2();
 		elif(int(mode) == 3):
 			mode3();
+		elif(int(mode) == 4):
+			testMathias();
 		else:
 			break;
 		mode = "-1"
