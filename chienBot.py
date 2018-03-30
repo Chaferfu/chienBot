@@ -122,8 +122,11 @@ def reaction(dictThemes, theme, mot):
 	return message
 
 def testMathias():
-	print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
-
+	#print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
+	liste = ['a','b','c']
+	print(liste)
+	liste.clear()
+	print(liste)
 	return
 def testNathan():
 	d = stockWordsAndQuestions("mode2")
