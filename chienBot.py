@@ -50,28 +50,31 @@ def read_word_list_file(filename):
             wordlist.append(word)
     return wordlist
 
-#renvoie les mots & réponses contenue dans le fichier
+#renvoie les mots & réponses contenues dans le fichier
 def stockWordsAndQuestions(filename):
     dictThemes = {}
-    theme 
-    mots = []
-    questions = []
+    
     with open(filename, "r") as filepointer:
         for line in file.readlines():
-            word = line.split(" ")
-            while word[0] != '@':
-                if word[0] == '£':
-                    theme = word[0]
+        	theme
+			mots = []
+			questions = []
+			while line != '@':
+            	if line == '£':
+                	line = file.readlines()
+                    theme = line
                 else:
-                    mots.append(word)
+                    mots.append(line)
                 line = file.readlines()
-                word = line.split(" ")
 
-            word = line.split(" ")
-            while word[0] != '$':
-                questions.append(word)
+            line = file.readlines()
+            while line != '$':
+                questions.append(line)
                 line = file.readlines()
-                word = line.split(" ")
+            dictThemes[theme] = (mots, questions)
+
+    return dictThemes
+
 def mode1():
 	return
 
@@ -93,12 +96,17 @@ def reponseNulle(tabMots):
 
 
 if __name__=="__main__":
-	mode = "-1"
-	while ((int(mode) < 0) or (int(mode) > 3)): 
-		mode = input("Entrez ");
-	{
-		0 : mathias(),
-		1 : mode1(),
-		2 : "Mode 2",
-		3 : "Mode 3"
-	}[int(mode)]
+	d = stockWordsAndQuestions("mode2")
+	for x in d:
+		print (x)
+		for y in d[x]
+			print(y, ':', d[x][y])
+	#mode = "-1"
+	#while ((int(mode) < 0) or (int(mode) > 3)): 
+	#	mode = input("Entrez ");
+	#{
+	#	0 : mathias(),
+	#	1 : mode1(),
+	#	2 : "Mode 2",
+	#	3 : "Mode 3"
+	#}[int(mode)]
