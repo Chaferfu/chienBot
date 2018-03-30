@@ -31,13 +31,9 @@ def mathias():
 			print("Calou : " + "Oui, c'est moi.")
 		else:
 
-<<<<<<< HEAD
 			reponse = reponseNulle(repliques, repliquesRares)
 			while reponse == derniere:
 				reponse = reponseNulle(repliques, repliquesRares)
-=======
-			reponse = reponseNulle(repliques)
->>>>>>> e7227972449badf62a3e07e9c705543430ced503
 
 			if triggered:
 				reponse = reponse.upper()
