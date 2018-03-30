@@ -48,14 +48,14 @@ def read_word_list_file(filename):
             if word=="": continue
             wordlist.append(word)
     return wordlist
-
+"""
 #renvoie les mots & réponses contenues dans le fichier
 def stockWordsAndQuestions(filename):
     dictThemes = {}
     
-    with open(filename, "r") as filepointer:
-        for line in file.readlines():
-        	theme
+	with open(filename, "r") as filepointer:
+		for line in file.readlines():
+			theme
 			mots = []
 			questions = []
 			while line != '@':
@@ -73,7 +73,7 @@ def stockWordsAndQuestions(filename):
             dictThemes[theme] = (mots, questions)
 
     return dictThemes
-
+"""
 def mode1():
 	print("mode 1")
 	return
@@ -86,6 +86,7 @@ def mode3():
 	print("mode 3")
 	return
 
+# Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
 def continuer(text):
 	if(text == "Au revoir !"):
 		return False
@@ -93,7 +94,6 @@ def continuer(text):
 
 #Renvoie une reponse plutot nulle et non constructive
 def reponseNulle(tabMots):
-
 	rng = randint(1,3)
 	text = ""
 
@@ -102,6 +102,24 @@ def reponseNulle(tabMots):
 		text += " "
 	return text
 
+# Cherche si un mot rentre par l'utilisateur figure dans le dictionnaire et 
+# retourne le thème associé, ou "mot absent" si le mot n'est pas dans le 
+# dictionnaire
+def findTheme(word, dico):
+	for theme, valeur in dico.items():
+		if(valeur[0] == word):
+			return theme
+	return "mot absent"
+
+# Li
+def analyzeSentence(line, dico):
+	nbOcc = {}
+	for key in dico.keys():
+		nbOcc[key] = 0
+	word = line.strip()
+	if word=="": continue
+	if(findTheme(word, dico) != "mot absent"):
+		nbOcc[key]++;
 
 if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
