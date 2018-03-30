@@ -119,11 +119,6 @@ def reaction(dictThemes, theme, mot):
 def testMathias():
 	return
 def testNathan():
-	return
-def testBrian():
-	return
-
-if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
 	for theme,valeur in d.items():
 		print(theme, " :")
@@ -131,6 +126,11 @@ if __name__=="__main__":
 			print("mot :",mot)
 		for question in valeur[1]:
 			print("question :",question)
+	return
+def testBrian():
+	return
+
+if __name__=="__main__":
 
 	while(int(mode) != 4):
 		while ((int(mode) < 0) or (int(mode) > 4)): 
