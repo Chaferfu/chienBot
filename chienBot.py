@@ -30,15 +30,9 @@ def mathias():
 		if isNomPrononce:
 			print("Calou : " + "Oui, c'est moi.")
 		else:
-
-<<<<<<< HEAD
 			reponse = reponseNulle(repliques, repliquesRares)
 			while reponse == derniere:
 				reponse = reponseNulle(repliques, repliquesRares)
-=======
-			reponse = reponseNulle(repliques)
->>>>>>> e7227972449badf62a3e07e9c705543430ced503
-
 			if triggered:
 				reponse = reponse.upper()
 
@@ -115,6 +109,14 @@ def reponseNulle(tabMots, tabMotsrares):
 			text += " "
 
 	return text
+
+
+def reaction(dictThemes, theme, mot):
+
+	rng = randint(0,len(dictThemes[theme][1])-1)
+	message = dictThemes[theme][1][rng]
+	print(message)
+
 
 
 if __name__=="__main__":
