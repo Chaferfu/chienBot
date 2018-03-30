@@ -109,14 +109,21 @@ def reponseNulle(tabMots, tabMotsrares):
 
 	return text
 
-
+#Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
+
+	print(dictThemes[theme][1])
 
 	rng = randint(0,len(dictThemes[theme][1])-1)
 	message = dictThemes[theme][1][rng]
-	print(message)
+	message = message.split("*")
+	message = message[0] + mot + message[1]
+
+	return message
 
 def testMathias():
+	print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
+
 	return
 def testNathan():
 	d = stockWordsAndQuestions("mode2")
