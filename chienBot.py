@@ -56,23 +56,18 @@ def stockWordsAndQuestions(filename):
 	dictThemes = {}
 	key = ""
 	theme = ""
-	mots = []
-	questions = []
 	with open(filename, "r") as filepointer:
 		for line in filepointer:
 			line = line.strip()
 			if line[0] in ['£','@']:
 				key = line[0]
 				if key == '£':
-					if theme != "":
-						mots.clear()
-						questions.clear()
-						dictThemes[theme] = (mots, questions)
-					theme = line[1:]				
+					theme = line[1:]
+					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				mots.append(line)
+				dictThemes[theme][0].append(line)
 			elif(key == '@'):
-				questions.append(line)
+				dictThemes[theme][1].append(line)
 	return dictThemes
 
 def mode1():
