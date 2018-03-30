@@ -117,7 +117,7 @@ def reaction(dictThemes, theme, mot):
 	print(message)
 
 def testMathias():
-
+	return
 
 if __name__=="__main__":
 	d = stockWordsAndQuestions("mode2")
