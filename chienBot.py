@@ -131,7 +131,7 @@ def testBrian():
 	return
 
 if __name__=="__main__":
-
+	mode = "-1"
 	while(int(mode) != 4):
 		while ((int(mode) < 0) or (int(mode) > 4)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
