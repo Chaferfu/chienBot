@@ -9,27 +9,15 @@ def mathias():
 	while continuer(text):
 
 		text = input("Moi   : ")
-		jeDis = text.split(" ")
-
-		triggered = False
-
-		for mot in jeDis:
-			if mot == "Calou" or mot == "calou":
-				triggered = True
-
 		sleep(uniform(0.5,1.5))
-
-		if triggered:
-			print("Calou : " + "Oui, c'est moi.")
-		else:
-
+		reponse = reponseNulle(repliques)
+		while reponse == derniere:
 			reponse = reponseNulle(repliques)
-			while reponse == derniere:
-				reponse = reponseNulle(repliques)
 
 
-			print("Calou : " + reponse)
-			derniere = reponse
+		print("Calou : " + reponse)
+		derniere = reponse
+	return
 
 
 def read_word_list_file(filename):
@@ -42,6 +30,15 @@ def read_word_list_file(filename):
     return wordlist
 
 def mode1():
+	print("mode 1")
+	return
+
+def mode2():
+	print("mode 2")
+	return
+
+def mode3():
+	print("mode 3")
 	return
 
 def continuer(text):
@@ -72,11 +69,17 @@ def reponseNulle(tabMots):
 
 if __name__=="__main__":
 	mode = "-1"
-	while ((int(mode) < 0) or (int(mode) > 3)): 
-		mode = input("Entrez ");
-	{
-		0 : mathias(),
-		1 : mode1(),
-		2 : "Mode 2",
-		3 : "Mode 3"
-	}[int(mode)]
+	while(int(mode) != 4):
+		while ((int(mode) < 0) or (int(mode) > 4)): 
+			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
+		if(int(mode) == 0):
+			mathias();
+		elif(int(mode) == 1):
+			mode1();
+		elif(int(mode) == 2):
+			mode2();
+		elif(int(mode) == 3):
+			mode3();
+		else:
+			break;
+		mode = "-1"
