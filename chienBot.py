@@ -59,16 +59,16 @@ def stockWordsAndQuestions(filename):
     with open(filename, "r") as filepointer:
         for line in file.readlines():
             word = line.split(" ")
-            while word[0] != '@'
-                if word[0] == '£'
+            while word[0] != '@':
+                if word[0] == '£':
                     theme = word[0]
-                else
+                else:
                     mots.append(word)
                 line = file.readlines()
                 word = line.split(" ")
 
             word = line.split(" ")
-            while word[0] != '$'
+            while word[0] != '$':
                 questions.append(word)
                 line = file.readlines()
                 word = line.split(" ")
