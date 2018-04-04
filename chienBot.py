@@ -57,23 +57,18 @@ def stockWordsAndQuestions(filename):
 	dictThemes = {}
 	key = ""
 	theme = ""
-	mots = []
-	questions = []
 	with open(filename, "r") as filepointer:
 		for line in filepointer:
 			line = line.strip()
 			if line[0] in ['£','@']:
 				key = line[0]
 				if key == '£':
-					if theme != "":
-						mots.pop()
-						questions.pop()
-						dictThemes[theme] = (mots, questions)
-					theme = line[1:]				
+					theme = line[1:]
+					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				mots.append(line)
+				dictThemes[theme][0].append(line)
 			elif(key == '@'):
-				questions.append(line)
+				dictThemes[theme][1].append(line)
 	return dictThemes
 
 def mode1():
@@ -148,22 +143,33 @@ def analyzeSentence(line, dico):
 	#for theme in nbOcc.keys():
 
 
+#Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
+
+	print(dictThemes[theme][1])
 
 	rng = randint(0,len(dictThemes[theme][1])-1)
 	message = dictThemes[theme][1][rng]
-	print(message)
+	message = message.split("*")
+	message = message[0] + mot + message[1]
+
+	return message
 
 def testMathias():
+	#print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
+	liste = ['a','b','c']
+	print(liste)
+	liste.clear()
+	print(liste)
 	return
 def testNathan():
 	d = stockWordsAndQuestions("mode2")
 	for theme,valeur in d.items():
 		print(theme, " :")
 		for mot in valeur[0]:
-			print("mot :",mot)
+			print("mot :", mot)
 		for question in valeur[1]:
-			print("question :",question)
+			print("question :", question)
 	return
 
 def testBrian():
