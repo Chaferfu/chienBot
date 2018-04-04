@@ -66,7 +66,8 @@ def stockWordsAndQuestions(filename):
 					theme = line[1:]
 					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				dictThemes[theme][0].append(line)
+				line = line.replace(' ', '')
+				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
 	return dictThemes
@@ -111,9 +112,11 @@ def reponseNulle(tabMots, tabMotsrares):
 def findTheme(word, dico):
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
-			#print(w)
-			if(w == word or w + 's' == word):
-				return theme
+			for variante in w:
+				if(variante == word.replace(' ', '')):
+					print("truc")
+					return theme
+	print("mot absent")
 	return "mot absent"
 
 def removePunctuation(line):
@@ -140,6 +143,7 @@ def analyzeSentence(line, dico):
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
 	print(bestOcc)
+	return 
 	#for theme in nbOcc.keys():
 
 
@@ -174,6 +178,9 @@ def testNathan():
 
 def testBrian():
 	analyzeSentence("J'aime les dauphins, les chiens et les rhinopithèques de Stryker.", stockWordsAndQuestions("mode2"))
+	"""d = stockWordsAndQuestions("mode2")
+	for theme, valeur in d.items():
+		print(valeur[0][0][0])"""
 	return
 
 if __name__=="__main__":

@@ -1,8 +1,8 @@
 £animaux
-dauphin |dauphine |dauphins | dauphines
-chien |chienne |chiens |chiennes
+dauphin|dauphine|dauphins|dauphines
+chien |chienne | chiens |chiennes
 chat |chatte | chats |chattes
-souris |souris |souris |souris
+souris
 belette |||
 girafe |||
 suricate |||
@@ -39,6 +39,7 @@ couleuvre |||
 rhinocéros |||
 poisson mouton |||
 mouton |||
+rhinopithèque de Stryker | rhinopithèques de Stryker
 @
 Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? |ms
 Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ?|ms
