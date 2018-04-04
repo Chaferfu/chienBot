@@ -50,34 +50,10 @@ def read_word_list_file(filename):
             if word=="": continue
             wordlist.append(word)
     return wordlist
-"""
+
 #renvoie les mots & réponses contenues dans le fichier
 def stockWordsAndQuestions(filename):
-<<<<<<< HEAD
-    dictThemes = {}
-    
-	with open(filename, "r") as filepointer:
-		for line in file.readlines():
-			theme
-			mots = []
-			questions = []
-			while line != '@':
-            	if line == '£':
-                	line = file.readlines()
-                    theme = line
-                else:
-                    mots.append(line)
-                line = file.readlines()
 
-            line = file.readlines()
-            while line != '$':
-                questions.append(line)
-                line = file.readlines()
-            dictThemes[theme] = (mots, questions)
-
-    return dictThemes
-"""
-=======
 	dictThemes = {}
 	key = ""
 	theme = ""
@@ -100,7 +76,6 @@ def stockWordsAndQuestions(filename):
 				questions.append(line)
 	return dictThemes
 
->>>>>>> 68a47a2b0f64bb508a5fefc1d9970de51d4618c9
 def mode1():
 	print("mode 1")
 	return
@@ -120,12 +95,7 @@ def continuer(text):
 	return True
 
 #Renvoie une reponse plutot nulle et non constructive
-<<<<<<< HEAD
-def reponseNulle(tabMots):
-=======
 def reponseNulle(tabMots, tabMotsrares):
-
->>>>>>> 68a47a2b0f64bb508a5fefc1d9970de51d4618c9
 	rng = randint(1,3)
 	text = ""
 	for i in range(rng):
@@ -145,19 +115,38 @@ def reponseNulle(tabMots, tabMotsrares):
 # dictionnaire
 def findTheme(word, dico):
 	for theme, valeur in dico.items():
-		if(valeur[0] == word):
-			return theme
+		for w in valeur[0]:
+			#print(w)
+			if(w == word or w + 's' == word):
+				return theme
 	return "mot absent"
+
+def removePunctuation(line):
+	line = line.replace(',', '')
+	line = line.replace('.', '')
+	line = line.replace('!', '')
+	line = line.replace('?', '')
+
+	return line
 
 # Li
 def analyzeSentence(line, dico):
 	nbOcc = {}
 	for key in dico.keys():
 		nbOcc[key] = 0
-	word = line.strip()
-	if word=="": continue
-	if(findTheme(word, dico) != "mot absent"):
-		nbOcc[key]++;
+		print(key)
+	line = removePunctuation(line)
+	words = line.split(' ')
+	print(words)
+	for word in words:
+		print(word)
+		if(findTheme(word, dico) != "mot absent"):
+			nbOcc[key] += 1
+
+	bestOcc = max([ nbOcc[k] for k in nbOcc])
+	print(bestOcc)
+	#for theme in nbOcc.keys():
+
 
 def reaction(dictThemes, theme, mot):
 
@@ -176,13 +165,15 @@ def testNathan():
 		for question in valeur[1]:
 			print("question :",question)
 	return
+
 def testBrian():
+	analyzeSentence("J'aime les dauphins, les chiens et les rhinopithèques de Stryker.", stockWordsAndQuestions("mode2"))
 	return
 
 if __name__=="__main__":
 	mode = "-1"
 	while(int(mode) != 4):
-		while ((int(mode) < 0) or (int(mode) > 4)): 
+		while ((int(mode) < 0) or (int(mode) > 7)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
 		if(int(mode) == 0):
 			mathias();
