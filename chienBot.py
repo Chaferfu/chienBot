@@ -1,4 +1,5 @@
-from random import randint, uniform
+from random import randint
+import random 
 from time import sleep
 
 def mathias():
@@ -115,7 +116,7 @@ def findTheme(word, dico):
 			for variante in w:
 				if(variante == word.replace(' ', '')):
 					print("Ce mot appartient au thème " + theme)
-					return theme
+					return theme, w
 	print("mot absent")
 	return "mot absent"
 
@@ -130,8 +131,11 @@ def removePunctuation(line):
 # Li
 def analyzeSentence(line, dico):
 	nbOcc = {}
+	wordsInTheme = {}
 	theme = ""
+	genre = ""
 	for key in dico.keys():
+		wordsInTheme[key] = []
 		nbOcc[key] = 0
 		print(key)
 	line = removePunctuation(line)
@@ -139,10 +143,11 @@ def analyzeSentence(line, dico):
 	print(words)
 	for word in words:
 		print(word)
-		theme = findTheme(word, dico)
+		theme, wordArray = findTheme(word, dico)
 		if(theme != "mot absent"):
 			print("Theme trouv : " + theme)
 			nbOcc[theme] += 1
+			wordsInTheme[theme].append(wordArray)
 
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
@@ -151,16 +156,13 @@ def analyzeSentence(line, dico):
 
 	for k in nbOcc.keys():
 		if nbOcc[k] == bestOcc:
-			return k
+			return k, random.choice(wordsInTheme[k]),genre
 
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
-
-	print(dictThemes[theme][1])
-
-	rng = randint(0,len(dictThemes[theme][1])-1)
-	message = dictThemes[theme][1][rng]
+	b = True
+	message = ""
 	message = message.split("*")
 	message = message[0] + mot + message[1]
 
@@ -173,6 +175,7 @@ def testMathias():
 	liste.clear()
 	print(liste)
 	return
+
 def testNathan():
 	d = stockWordsAndQuestions("mode2")
 	for theme,valeur in d.items():
@@ -184,11 +187,10 @@ def testNathan():
 	return
 
 def testBrian():
-	k = analyzeSentence("J'aime les dauphins, les chiens et les rhinopithèques de Stryker.", stockWordsAndQuestions("mode2"))
-	print(k)
-	"""d = stockWordsAndQuestions("mode2")
-	for theme, valeur in d.items():
-		print(valeur[0][0][0])"""
+	d = stockWordsAndQuestions("mode2")
+	k,w = analyzeSentence("J'aime les dauphins, un chien et la dépression.",d)
+	r = reaction(d,k,w)
+	print(r)
 	return
 
 if __name__=="__main__":

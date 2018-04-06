@@ -2,7 +2,7 @@
 dauphin|dauphine|dauphins|dauphines
 chien |chienne | chiens |chiennes
 chat |chatte | chats |chattes
-souris
+|souris ||
 belette |||
 girafe |||
 suricate |||
@@ -13,15 +13,15 @@ antilope |||
 sphynx |||
 fouine |||
 marabout |||
-mante religieuse |||
+mante|||
 buffle |||
 orque |||
-troglodyte mignon |||
+troglodyte|||
 ouaouaron |||
-ours à lunettes |||
-ours brun |||
-ours noir |||
-ours malais |||
+ours ||
+ours |||
+ours |||
+ours |||
 iguane |||
 cachalot |||
 panda roux |||
@@ -41,12 +41,13 @@ poisson mouton |||
 mouton |||
 rhinopithèque de Stryker | rhinopithèques de Stryker
 @
-Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? |ms
-Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ?|ms
-Ahah, c'est hilarant. Ca me fait penser à un * que j'avais autrefois dans ma maison familiale. Il est mort le pauvre, on a fini par le manger. Tu aimes manger les animaux ?|m
-Comment vous appelez-vous déjà ? Non je rigole, ça ne m'intéresse pas vraiment. Deux chose m'importent dans le vie, l'ail et votre rapport aux animaux, notamment les * qui sont plutôt mignons... Parlez-moi de ces animaux.|ms
-Désolé mais j'ai bientôt une séance de cinéma, je vais voir un film sur les animaux, vous connaissez Zootopie ? Ahah, c'était un piège, je voulais voir votre réaction... vous semblez ne pas apprécier les * ?|ms
+Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? mp
+Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ? mp
+Ahah, c'est hilarant. Ca me fait penser à un * que j'avais autrefois dans ma maison familiale. Il est mort le pauvre, on a fini par le manger. Tu aimes manger les animaux ? ms
+Comment vous appelez-vous déjà ? Non je rigole, ça ne m'intéresse pas vraiment. Deux chose m'importent dans le vie, l'ail et votre rapport aux animaux, notamment les * qui sont plutôt mignons... Parlez-moi de ces animaux.|mp
+Désolé mais j'ai bientôt une séance de cinéma, je vais voir un film sur les animaux, vous connaissez Zootopie ? Ahah, c'était un piège, je voulais voir votre réaction... vous semblez ne pas apprécier les * ? ms
 £dépression
+dépression
 abaissement
 abattement
 accablement
@@ -104,8 +105,5 @@ torpeur
 tristesse
 vallée
 @
-<<<<<<< HEAD
 Est ce que vous ressentez une sorte de * en ce moment ?
-=======
 question *|m
->>>>>>> deebfe75787d1e8036d644fc0c1dfc663ba75dba
