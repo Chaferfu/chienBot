@@ -2,7 +2,7 @@ from random import randint
 import random 
 from time import sleep
 
-def mathias():
+def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("mode0")
 	repliquesRares = read_word_list_file("mode1")
@@ -74,7 +74,7 @@ def stockWordsAndQuestions(filename):
 	return dictThemes
 
 def mode1():
-	print("mode 1")
+	calou()
 	return
 
 def mode2():
@@ -162,18 +162,28 @@ def analyzeSentence(line, dico):
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
 	b = True
-	message = ""
+	reac = random.choice(dictThemes[theme][1])
+	reac = reac.split('|')
+	message = reac[0].strip()
+	genre = reac[1].strip()
+	if genre == 'ms':
+		fill = mot[0]
+	elif genre == 'fs':
+		fill = mot[1]
+	elif genre == 'mp':
+		fill = mot[2]
+	elif genre == 'fp':
+		fill = mot[3]
+	else:
+		print("oula ca bug erreur genre reponse\n")
 	message = message.split("*")
-	message = message[0] + mot + message[1]
+	message = message[0] + fill + message[1]
 
 	return message
 
 def testMathias():
-	#print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
-	liste = ['a','b','c']
-	print(liste)
-	liste.clear()
-	print(liste)
+	print(reaction(stockWordsAndQuestions("mode2"), "animaux", ["chien","chienne" ,"chiens" ,"chiennes" ]))
+	
 	return
 
 def testNathan():
@@ -199,7 +209,7 @@ if __name__=="__main__":
 		while ((int(mode) < 0) or (int(mode) > 7)): 
 			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
 		if(int(mode) == 0):
-			mathias();
+			calou();
 		elif(int(mode) == 1):
 			mode1();
 		elif(int(mode) == 2):
