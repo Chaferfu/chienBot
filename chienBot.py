@@ -1,6 +1,7 @@
 from random import randint
 import random 
 from time import sleep
+import os
 
 def mathias():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
@@ -42,6 +43,12 @@ def mathias():
 		derniere = reponse
 	return
 
+def check_Connexion(name, filename):
+	with open(filename, "r") as filepointer:
+		for line in filepointer.readlines():
+			if name == line.strip():
+				return True
+	return False
 
 def read_word_list_file(filename):
     wordlist = []
@@ -53,7 +60,7 @@ def read_word_list_file(filename):
     return wordlist
 
 #renvoie les mots & réponses contenues dans le fichier
-def stockWordsAndQuestions(filename):
+def stock_Words_And_Questions(filename):
 
 	dictThemes = {}
 	key = ""
@@ -169,7 +176,7 @@ def reaction(dictThemes, theme, mot):
 	return message
 
 def testMathias():
-	#print(reaction(stockWordsAndQuestions("mode2"), "animaux", "oiseau"))
+	#print(reaction(stock_Words_And_Questions("mode2"), "animaux", "oiseau"))
 	liste = ['a','b','c']
 	print(liste)
 	liste.clear()
@@ -177,17 +184,17 @@ def testMathias():
 	return
 
 def testNathan():
-	d = stockWordsAndQuestions("mode2")
-	for theme,valeur in d.items():
-		print(theme, " :")
-		for mot in valeur[0]:
-			print("mot :", mot)
-		for question in valeur[1]:
-			print("question :", question)
-	return
+	while True :
+		name = input("name pls :\n")
+		if check_Connexion(name, "utilisateurs"):
+			print("Oh content de te revoir ", name)
+		else:
+			print("Enchanté ", name)
+			fichier = open(os.path.join("Users",name), "w")
+			fichier.close()
 
 def testBrian():
-	d = stockWordsAndQuestions("mode2")
+	d = stock_Words_And_Questions("mode2")
 	k,w = analyzeSentence("J'aime les dauphins, un chien et la dépression.",d)
 	r = reaction(d,k,w)
 	print(r)
