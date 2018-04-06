@@ -116,7 +116,6 @@ def findTheme(word, dico):
 				if(variante == word.replace(' ', '')):
 					print("Ce mot appartient au thème " + theme)
 					return theme
-	print("mot absent")
 	return "mot absent"
 
 def removePunctuation(line):
@@ -124,6 +123,8 @@ def removePunctuation(line):
 	line = line.replace('.', '')
 	line = line.replace('!', '')
 	line = line.replace('?', '')
+	line = line.replace(';', '')
+	line = line.replace(':', '')
 
 	return line
 
