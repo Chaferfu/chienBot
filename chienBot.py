@@ -114,7 +114,7 @@ def findTheme(word, dico):
 		for w in valeur[0]:
 			for variante in w:
 				if(variante == word.replace(' ', '')):
-					print("truc")
+					print("Ce mot appartient au thème " + theme)
 					return theme
 	print("mot absent")
 	return "mot absent"
@@ -130,6 +130,7 @@ def removePunctuation(line):
 # Li
 def analyzeSentence(line, dico):
 	nbOcc = {}
+	theme = ""
 	for key in dico.keys():
 		nbOcc[key] = 0
 		print(key)
@@ -138,13 +139,19 @@ def analyzeSentence(line, dico):
 	print(words)
 	for word in words:
 		print(word)
-		if(findTheme(word, dico) != "mot absent"):
-			nbOcc[key] += 1
+		theme = findTheme(word, dico)
+		if(theme != "mot absent"):
+			print("Theme trouv : " + theme)
+			nbOcc[theme] += 1
+
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
-	print(bestOcc)
-	return 
-	#for theme in nbOcc.keys():
+	for k, v in nbOcc.items():
+		print(k, v)
+
+	for k in nbOcc.keys():
+		if nbOcc[k] == bestOcc:
+			return k
 
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
@@ -177,7 +184,8 @@ def testNathan():
 	return
 
 def testBrian():
-	analyzeSentence("J'aime les dauphins, les chiens et les rhinopithèques de Stryker.", stockWordsAndQuestions("mode2"))
+	k = analyzeSentence("J'aime les dauphins, les chiens et les rhinopithèques de Stryker.", stockWordsAndQuestions("mode2"))
+	print(k)
 	"""d = stockWordsAndQuestions("mode2")
 	for theme, valeur in d.items():
 		print(valeur[0][0][0])"""
