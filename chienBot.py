@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, uniform
 import random 
 from time import sleep
 import os
@@ -85,7 +85,43 @@ def mode1():
 	return
 
 def mode2():
-	print("mode 2")
+
+	smalltalk = read_word_list_file("mode2_hmmm")
+	dico = stock_Words_And_Questions("mode2")
+	derniere = ""
+
+	text = ""
+	while continuer(text):
+
+		text = input("Moi   : ")
+		jeDis = text.split(" ")
+
+		isNomPrononce = False
+
+		for mot in jeDis:
+			if mot == "Calou" or mot == "calou":
+				isNomPrononce = True
+
+		for mot in jeDis:
+			if mot in motsCles:
+				triggered = True
+
+
+		sleep(uniform(0.5,1.5))
+
+		if isNomPrononce:
+			print("Calou : " + "Oui, c'est moi.")
+		else:
+			reponse = reponseNulle(repliques, repliquesRares)
+			while reponse == derniere:
+				reponse = reponseNulle(repliques, repliquesRares)
+
+			if triggered:
+				reponse = reponse.upper()
+
+		print("Calou : " + reponse)
+		derniere = reponse
+
 	return
 
 def mode3():
@@ -171,11 +207,12 @@ def analyzeSentence(line, dico):
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
-	b = True
+
 	reac = random.choice(dictThemes[theme][1])
 	reac = reac.split('|')
 	message = reac[0].strip()
 	genre = reac[1].strip()
+	reponse = ""
 	if genre == 'ms':
 		fill = mot[0]
 	elif genre == 'fs':
@@ -187,12 +224,21 @@ def reaction(dictThemes, theme, mot):
 	else:
 		print("oula ca bug erreur genre reponse\n")
 	message = message.split("*")
-	message = message[0] + fill + message[1]
 
-	return message
+	#print(message)
+#	message = message[0] + fill + message[1]
+	for i in range(0,len(message)-1):
+		reponse = reponse + message[i]
+		reponse = reponse + fill
+		#print("iteratio :" + str(i) + "reponse = " + reponse)
+
+	reponse = reponse + message[-1]
+
+	return reponse
 
 def testMathias():
-	print(reaction(stockWordsAndQuestions("mode2"), "animaux", ["chien","chienne" ,"chiens" ,"chiennes" ]))
+
+	print(analyzeSentence("Salut haha ouais chien lol", stock_Words_And_Questions("mode2")))
 	return
 
 def testNathan():
