@@ -107,6 +107,9 @@ def mode2():
 
 		else:
 			reponse = reaction(dico, themeDetecte, motDetecte)
+			while reponse == derniere:
+				reponse = reaction(dico, themeDetecte, motDetecte)
+
 
 		print("Nathanaelle Poilane : " + reponse)
 		derniere = reponse
