@@ -93,33 +93,22 @@ def mode2():
 	text = ""
 	while continuer(text):
 
-		text = input("Moi   : ")
-		jeDis = text.split(" ")
+		text = input("Moi                 : ")
 
-		isNomPrononce = False
-
-		for mot in jeDis:
-			if mot == "Calou" or mot == "calou":
-				isNomPrononce = True
-
-		for mot in jeDis:
-			if mot in motsCles:
-				triggered = True
-
+		themeDetecte, motDetecte = analyzeSentence(text, dico)
 
 		sleep(uniform(0.5,1.5))
 
-		if isNomPrononce:
-			print("Calou : " + "Oui, c'est moi.")
-		else:
-			reponse = reponseNulle(repliques, repliquesRares)
+		if themeDetecte == "no":
+
+			reponse = random.choice(smalltalk)
 			while reponse == derniere:
-				reponse = reponseNulle(repliques, repliquesRares)
+				reponse = random.choice(smalltalk)
 
-			if triggered:
-				reponse = reponse.upper()
+		else:
+			reponse = reaction(dico, themeDetecte, motDetecte)
 
-		print("Calou : " + reponse)
+		print("Nathanaelle Poilane : " + reponse)
 		derniere = reponse
 
 	return
@@ -157,12 +146,12 @@ def findTheme(word, dico):
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				if(variante == word.replace(' ', '')):
-					print("Ce mot appartient au thème " + theme)
+				if variante != '' and (variante == word.replace(' ', '')):
+					print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
 
 					return theme, w
 
-	return "mot absent"
+	return "mot absent", []
 
 def removePunctuation(line):
 	line = line.replace(',', '')
@@ -175,34 +164,79 @@ def removePunctuation(line):
 	return line
 
 # Li
+# def analyzeSentence(line, dico):
+# 	nbOcc = {}
+# 	wordsInTheme = {}
+# 	theme = ""
+# 	genre = ""
+# 	for key in dico.keys():
+# 		wordsInTheme[key] = []
+# 		nbOcc[key] = 0
+# 		print(key)
+# 	line = removePunctuation(line)
+# 	words = line.split(' ')
+# 	print(words)
+# 	for word in words:
+# 		print(word)
+# 		#print("HEEEY")
+# 		#print(findTheme(word, dico))
+# 		theme, wordArray = findTheme(word, dico)
+# 		if(theme != "mot absent"):
+# 			print("Theme trouv : " + theme)
+# 			nbOcc[theme] += 1
+# 			wordsInTheme[theme].append(wordArray)
+
+
+# 	bestOcc = max([ nbOcc[k] for k in nbOcc])
+# 	for k, v in nbOcc.items():
+# 		print("#################")
+# 		print(k, v)
+
+# 	for k in nbOcc.keys():
+# 		if nbOcc[k] == bestOcc:
+# 			return k, random.choice(wordsInTheme[k]),genre
+
 def analyzeSentence(line, dico):
 	nbOcc = {}
 	wordsInTheme = {}
 	theme = ""
-	genre = ""
+	nothingfound = True
+
 	for key in dico.keys():
 		wordsInTheme[key] = []
 		nbOcc[key] = 0
-		print(key)
+		# print(key)
 	line = removePunctuation(line)
 	words = line.split(' ')
-	print(words)
+	# print(words)
 	for word in words:
-		print(word)
+		# print(word)
+		#print("HEEEY")
+		#print(findTheme(word, dico))
 		theme, wordArray = findTheme(word, dico)
 		if(theme != "mot absent"):
-			print("Theme trouv : " + theme)
+			# print("Theme trouv : " + theme)
 			nbOcc[theme] += 1
 			wordsInTheme[theme].append(wordArray)
 
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
 	for k, v in nbOcc.items():
-		print(k, v)
+		# print("#################")
+		# print(bestOcc)
+		# print(k, v)
+		if 0<v :
+			nothingfound = False
+
+	if nothingfound:
+		return "no", []
 
 	for k in nbOcc.keys():
 		if nbOcc[k] == bestOcc:
-			return k, random.choice(wordsInTheme[k]),genre
+			return k, random.choice(wordsInTheme[k])
+
+	print("ca bug :(")
+
 
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
@@ -238,7 +272,7 @@ def reaction(dictThemes, theme, mot):
 
 def testMathias():
 
-	print(analyzeSentence("Salut haha ouais chien lol", stock_Words_And_Questions("mode2")))
+	print(analyzeSentence("Salut haha ouais ki lol", stock_Words_And_Questions("mode2")))
 	return
 
 def testNathan():
