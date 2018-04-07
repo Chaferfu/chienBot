@@ -149,8 +149,8 @@ def findTheme(word, dico):
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				if variante != '' and (variante == word.replace(' ', '')):
-					print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
+				if variante != '' and (variante == word.replace(' ', '').lower()):
+					# print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
 
 					return theme, w
 
