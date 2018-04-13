@@ -289,7 +289,20 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
-def caseFamilly(answer, familly)
+def check_Coherence(answer,keyFileName, valueFileName):
+	keys = read_word_list_file(keyFileName)
+	values = read_word_list_file(valueFileName)
+	answer = answer.split()
+	for word in answer:
+		for k in keys:
+			print(word.upper())
+			if k == word.upper():
+				for w in answer:			
+					for v in values:
+						if v == w.upper():
+							return (k,v)
+				return (k,'')
+	return ('','')
 
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
@@ -299,27 +312,26 @@ def testMathias():
 	return
 
 def testNathan():
-	names = []
-	with open('Names', "wb") as f:
-		for line in f:
-			names.append(line[0])
-	
+	answer = "salut tante Nathan"
+	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
+	dico = {}
+	dico[k] = v
+	print(dico)
+	# while True :
+	# 	name = input("name pls :\n")
+	# 	if check_Connexion(name, "utilisateurs"):
+	# 		user1 = user.User(name)
+	# 		user1.famille['soeur'] = "Hombeline"
+	# 		print("Oh content de te revoir ", name)
+	# 		stockDataInUser(user1)
+	# 		tmp = readDataFromUser(user1)
+	# 		print(tmp.infos[0])
+	# 		print(tmp.famille)
+	# 	else:
+	# 		print("Enchanté ", name)
+	# 		fichier = open(os.path.join("Users",name), "a")
 
-	while True :
-		name = input("name pls :\n")
-		if check_Connexion(name, "utilisateurs"):
-			user1 = user.User(name)
-			user1.famille['soeur'] = "Hombeline"
-			print("Oh content de te revoir ", name)
-			stockDataInUser(user1)
-			tmp = readDataFromUser(user1)
-			print(tmp.infos[0])
-			print(tmp.famille)
-		else:
-			print("Enchanté ", name)
-			fichier = open(os.path.join("Users",name), "a")
-
-			fichier.close()
+	# 		fichier.close()
 
 def testBrian():
 	d = stock_Words_And_Questions("mode2")
