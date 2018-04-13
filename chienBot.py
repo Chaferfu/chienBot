@@ -2,6 +2,17 @@ from random import randint, uniform
 import random 
 from time import sleep
 import os
+import pickle
+import user
+
+def stockDataInUser(user):
+	with open('Users/' + user.infos[0], "wb") as u:
+		pickle.dump(user, u, protocol = pickle.HIGHEST_PROTOCOL)
+
+def readDataFromUser(user):
+	with open('Users/' + user.infos[0], "rb") as u:
+		unserialiazed_data = pickle.load(u)
+		return unserialiazed_data
 
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
@@ -48,6 +59,9 @@ def check_Connexion(name, filename):
 		for line in filepointer.readlines():
 			if name == line.strip():
 				return True
+
+	with open(filename, 'a') as filepointer:
+		filepointer.write(name + "\n")
 	return False
 
 def read_word_list_file(filename):
@@ -282,10 +296,17 @@ def testNathan():
 	while True :
 		name = input("name pls :\n")
 		if check_Connexion(name, "utilisateurs"):
+			user1 = user.User(name)
+			user1.famille['soeur'] = "Hombeline"
 			print("Oh content de te revoir ", name)
+			stockDataInUser(user1)
+			tmp = readDataFromUser(user1)
+			print(tmp.infos[0])
+			print(tmp.famille)
 		else:
 			print("Enchanté ", name)
-			fichier = open(os.path.join("Users",name), "w")
+			fichier = open(os.path.join("Users",name), "a")
+
 			fichier.close()
 
 def testBrian():
