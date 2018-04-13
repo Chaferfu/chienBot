@@ -2,6 +2,17 @@ from random import randint, uniform
 import random 
 from time import sleep
 import os
+import pickle
+import user
+
+def stockDataInUser(user):
+	with open('Users/' + user.infos[0], "wb") as u:
+		pickle.dump(user, u, protocol = pickle.HIGHEST_PROTOCOL)
+
+def readDataFromUser(user):
+	with open('Users/' + user.infos[0], "rb") as u:
+		unserialiazed_data = pickle.load(u)
+		return unserialiazed_data
 
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
@@ -48,6 +59,9 @@ def check_Connexion(name, filename):
 		for line in filepointer.readlines():
 			if name == line.strip():
 				return True
+
+	with open(filename, 'a') as filepointer:
+		filepointer.write(name + "\n")
 	return False
 
 def read_word_list_file(filename):
@@ -74,7 +88,7 @@ def stock_Words_And_Questions(filename):
 					theme = line[1:]
 					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				line = line.replace(' ', '')
+	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
@@ -238,6 +252,8 @@ def analyzeSentence(line, dico):
 		if nbOcc[k] == bestOcc:
 			return k, random.choice(wordsInTheme[k])
 
+
+	#should be dead code from here
 	print("ca bug :(")
 
 
@@ -276,8 +292,10 @@ def reaction(dictThemes, theme, mot):
 def caseFamilly(answer, familly)
 
 def testMathias():
+	dico = stock_Words_And_Questions("mode2")
+	print(dico)
 
-	print(analyzeSentence("Salut haha ouais ki lol", stock_Words_And_Questions("mode2")))
+	print(analyzeSentence("Salut haha ouais ki lol", dico))
 	return
 
 def testNathan():
@@ -290,10 +308,17 @@ def testNathan():
 	while True :
 		name = input("name pls :\n")
 		if check_Connexion(name, "utilisateurs"):
+			user1 = user.User(name)
+			user1.famille['soeur'] = "Hombeline"
 			print("Oh content de te revoir ", name)
+			stockDataInUser(user1)
+			tmp = readDataFromUser(user1)
+			print(tmp.infos[0])
+			print(tmp.famille)
 		else:
 			print("Enchanté ", name)
-			fichier = open(os.path.join("Users",name), "w")
+			fichier = open(os.path.join("Users",name), "a")
+
 			fichier.close()
 
 def testBrian():
