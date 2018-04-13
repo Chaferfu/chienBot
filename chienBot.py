@@ -273,12 +273,20 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
+def caseFamilly(answer, familly)
+
 def testMathias():
 
 	print(analyzeSentence("Salut haha ouais ki lol", stock_Words_And_Questions("mode2")))
 	return
 
 def testNathan():
+	names = []
+	with open('Names', "wb") as f:
+		for line in f:
+			names.append(line[0])
+	
+
 	while True :
 		name = input("name pls :\n")
 		if check_Connexion(name, "utilisateurs"):
