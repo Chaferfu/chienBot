@@ -74,7 +74,7 @@ def stock_Words_And_Questions(filename):
 					theme = line[1:]
 					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				line = line.replace(' ', '')
+	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
@@ -238,6 +238,8 @@ def analyzeSentence(line, dico):
 		if nbOcc[k] == bestOcc:
 			return k, random.choice(wordsInTheme[k])
 
+
+	#should be dead code from here
 	print("ca bug :(")
 
 
@@ -274,8 +276,10 @@ def reaction(dictThemes, theme, mot):
 	return reponse
 
 def testMathias():
+	dico = stock_Words_And_Questions("mode2")
+	print(dico)
 
-	print(analyzeSentence("Salut haha ouais ki lol", stock_Words_And_Questions("mode2")))
+	print(analyzeSentence("Salut haha ouais ki lol", dico))
 	return
 
 def testNathan():
