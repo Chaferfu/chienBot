@@ -131,7 +131,11 @@ def mode2():
 	return
 
 def mode3():
-	print("mode 3")
+	while continuer(text):
+
+		text = input("Moi                 : ")
+		reponse = ""
+		print("Nathanaelle Poilane : " + reponse)
 	return
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
@@ -314,10 +318,7 @@ def testNathan():
 			fichier.close()
 
 def testBrian():
-	d = stock_Words_And_Questions("mode2")
-	k,w = analyzeSentence("J'aime les dauphins, un chien et la dépression.",d)
-	r = reaction(d,k,w)
-	print(r)
+	if(check_Coherence("J'ai une soeur.", keyFamily, valueFamily):
 	return
 
 if __name__=="__main__":
