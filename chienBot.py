@@ -75,7 +75,7 @@ def stock_Words_And_Questions(filename):
 					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
 	#			line = line.replace(' ', '')
-				dictThemes[theme][0].append(line.split('|'))
+				dictThemes[theme][0].append(line.lower().split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
 	return dictThemes
@@ -145,16 +145,72 @@ def reponseNulle(tabMots, tabMotsrares):
 # Cherche si un mot rentre par l'utilisateur figure dans le dictionnaire et 
 # retourne le thème associé, ou "mot absent" si le mot n'est pas dans le 
 # dictionnaire
-def findTheme(word, dico):
+def findThemes(line, dico):
+
+	nbOcc = {}
+	wordsInTheme = {}
+
+	for key in dico.keys():
+		wordsInTheme[key] = []
+		nbOcc[key] = 0
+		# print(key)
+
+	#print("line is : " + line)
+
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				if variante != '' and (variante == word.replace(' ', '').lower()):
+				#print(" is " + variante + " in line ? : ")
+				if variante != '' and variante.strip() in line.lower():
+					#print("yes")
 					# print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
+					
+					hypothese = variante.strip().split(' ')
+					tokens = line.lower().strip().split(' ')
 
-					return theme, w
+					for tok in tokens:
+						#print ("tok : " + tok + " \t hypo : " + hypothese[0])
+						if tok == hypothese[0]:
+							nbOcc[theme] += 1
+							wordsInTheme[theme].append(w)
+						
+					
+	return nbOcc, wordsInTheme
 
-	return "mot absent", []
+
+def analyzeSentence(line, dico):
+	
+	theme = ""
+	nothingfound = True
+
+	
+	line = removePunctuation(line)
+	#words = line.split(' ')
+	# print(words)
+	
+		# print(word)
+		#print("HEEEY")
+		#print(findTheme(word, dico))
+	nbOcc, wordsInTheme = findThemes(line, dico)
+
+	bestOcc = max([ nbOcc[k] for k in nbOcc])
+	for k, v in nbOcc.items():
+		# print("#################")
+		# print(bestOcc)
+		# print(k, v)
+		if 0<v :
+			nothingfound = False
+
+	if nothingfound:
+		return "no", []
+
+	for k in nbOcc.keys():
+		if nbOcc[k] == bestOcc:
+			return k, random.choice(wordsInTheme[k])
+
+
+	#should be dead code from here
+	print("ca bug :(")
 
 def removePunctuation(line):
 	line = line.replace(',', '')
@@ -199,49 +255,6 @@ def removePunctuation(line):
 # 		if nbOcc[k] == bestOcc:
 # 			return k, random.choice(wordsInTheme[k]),genre
 
-def analyzeSentence(line, dico):
-	nbOcc = {}
-	wordsInTheme = {}
-	theme = ""
-	nothingfound = True
-
-	for key in dico.keys():
-		wordsInTheme[key] = []
-		nbOcc[key] = 0
-		# print(key)
-	line = removePunctuation(line)
-	words = line.split(' ')
-	# print(words)
-	for word in words:
-		# print(word)
-		#print("HEEEY")
-		#print(findTheme(word, dico))
-		theme, wordArray = findTheme(word, dico)
-		if(theme != "mot absent"):
-			# print("Theme trouv : " + theme)
-			nbOcc[theme] += 1
-			wordsInTheme[theme].append(wordArray)
-
-
-	bestOcc = max([ nbOcc[k] for k in nbOcc])
-	for k, v in nbOcc.items():
-		# print("#################")
-		# print(bestOcc)
-		# print(k, v)
-		if 0<v :
-			nothingfound = False
-
-	if nothingfound:
-		return "no", []
-
-	for k in nbOcc.keys():
-		if nbOcc[k] == bestOcc:
-			return k, random.choice(wordsInTheme[k])
-
-
-	#should be dead code from here
-	print("ca bug :(")
-
 
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
@@ -261,14 +274,14 @@ def reaction(dictThemes, theme, mot):
 	elif genre == 'fp':
 		fill = mot[3]
 	else:
-		print("oula ca bug erreur genre reponse\n")
+		print("oula ca bug erreur dans le ficher mode2 certainement\n")
 	message = message.split("*")
 
 	#print(message)
 #	message = message[0] + fill + message[1]
 	for i in range(0,len(message)-1):
 		reponse = reponse + message[i]
-		reponse = reponse + fill
+		reponse = reponse + fill.strip()
 		#print("iteratio :" + str(i) + "reponse = " + reponse)
 
 	reponse = reponse + message[-1]

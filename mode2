@@ -1,6 +1,7 @@
 £animaux
 dauphin|dauphine|dauphins|dauphines
 chien |chienne | chiens |chiennes
+rhinopithèque de Stryker | rhinopithèque de Stryker | rhinopithèques de Stryker| rhinopithèques de Stryker
 chat |chatte | chats |chattes
 souris|souris |souris|souris
 belette |||
@@ -36,7 +37,6 @@ couleuvre |||
 rhinocéros |||
 poisson mouton |||
 mouton |||
-rhinopithèque de Stryker | rhinopithèquette de Mme Stryker | rhinopitèques de Stryker| c'est trop long
 @
 Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? | mp
 Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ? | mp
@@ -103,5 +103,8 @@ torpeur
 tristesse
 vallée
 @
-Est ce que vous ressentez une sorte de * en ce moment ?
-question *|m
+Est ce que vous ressentez une sorte de * en ce moment ?|ms
+question *|ms
+£mort
+mort
+décès
