@@ -2,6 +2,17 @@ from random import randint, uniform
 import random 
 from time import sleep
 import os
+import pickle
+import user
+
+def stockDataInUser(user):
+	with open('Users/' + user.infos[0], "wb") as u:
+		pickle.dump(user, u, protocol = pickle.HIGHEST_PROTOCOL)
+
+def readDataFromUser(user):
+	with open('Users/' + user.infos[0], "rb") as u:
+		unserialiazed_data = pickle.load(u)
+		return unserialiazed_data
 
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
@@ -48,6 +59,9 @@ def check_Connexion(name, filename):
 		for line in filepointer.readlines():
 			if name == line.strip():
 				return True
+
+	with open(filename, 'a') as filepointer:
+		filepointer.write(name + "\n")
 	return False
 
 def read_word_list_file(filename):
@@ -74,7 +88,7 @@ def stock_Words_And_Questions(filename):
 					theme = line[1:]
 					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
-				line = line.replace(' ', '')
+	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
@@ -117,7 +131,11 @@ def mode2():
 	return
 
 def mode3():
-	print("mode 3")
+	while continuer(text):
+
+		text = input("Moi                 : ")
+		reponse = ""
+		print("Nathanaelle Poilane : " + reponse)
 	return
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
@@ -238,6 +256,8 @@ def analyzeSentence(line, dico):
 		if nbOcc[k] == bestOcc:
 			return k, random.choice(wordsInTheme[k])
 
+
+	#should be dead code from here
 	print("ca bug :(")
 
 
@@ -273,27 +293,53 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
-def testMathias():
+def check_Coherence(answer,keyFileName, valueFileName):
+	keys = read_word_list_file(keyFileName)
+	values = read_word_list_file(valueFileName)
+	answer = answer.split()
+	for word in answer:
+		for k in keys:
+			print(word.upper())
+			if k == word.upper():
+				for w in answer:			
+					for v in values:
+						if v == w.upper():
+							return (k,v)
+				return (k,'')
+	return ('','')
 
-	print(analyzeSentence("Salut haha ouais ki lol", stock_Words_And_Questions("mode2")))
+def testMathias():
+	dico = stock_Words_And_Questions("mode2")
+	print(dico)
+
+	print(analyzeSentence("Salut haha ouais ki lol", dico))
 	return
 
 def testNathan():
-	while True :
-		name = input("name pls :\n")
-		if check_Connexion(name, "utilisateurs"):
-			print("Oh content de te revoir ", name)
-		else:
-			print("Enchanté ", name)
-			fichier = open(os.path.join("Users",name), "w")
-			fichier.close()
+	answer = "salut tante Nathan"
+	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
+	dico = {}
+	dico[k] = v
+	print(dico)
+	# while True :
+	# 	name = input("name pls :\n")
+	# 	if check_Connexion(name, "utilisateurs"):
+	# 		user1 = user.User(name)
+	# 		user1.famille['soeur'] = "Hombeline"
+	# 		print("Oh content de te revoir ", name)
+	# 		stockDataInUser(user1)
+	# 		tmp = readDataFromUser(user1)
+	# 		print(tmp.infos[0])
+	# 		print(tmp.famille)
+	# 	else:
+	# 		print("Enchanté ", name)
+	# 		fichier = open(os.path.join("Users",name), "a")
+
+	# 		fichier.close()
 
 def testBrian():
-	d = stock_Words_And_Questions("mode2")
-	k,w = analyzeSentence("J'aime les dauphins, un chien et la dépression.",d)
-	r = reaction(d,k,w)
-	print(r)
-	return
+	if(check_Coherence("J'ai une soeur.", keyFamily, valueFamily)):
+		return
 
 if __name__=="__main__":
 	mode = "-1"
