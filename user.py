@@ -23,6 +23,23 @@ class User:
 		# anecdotes
 		self.anecdotes = []
 
+	# ajoute un sport
+	def addSport(self,sport):
+		if sport not in self.sport:
+			self.sport.append(sport)
+
+	# permet d'afficher les informations sotckées sur le sport
+	def printSportUser(self):
+		i = 0
+		print("Pour ce qui est de tes activités sportives ? Tu m'as déjà parlé de ", end='')
+		for k in self.sport:	
+			i = i + 1
+			print(("ou encore de " if len(self.sport) <= i else ""), end='')
+			print(k + (", " if len(self.sport) > i else ""), end='')
+			
+		print(".")
+		print("\nEnfin en tout cas c'est tout ce que tu as pu me dire !")
+
 	# ajoute un membre de la famille en fondtion d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
 	def addFamilyMember(self,k,v):
@@ -30,11 +47,9 @@ class User:
 			if v != "":
 				if k in self.famille:
 					self.famille[k].append(v)
-					print("ajout")
 				else:
 					self.famille[k] = []
 					self.famille[k].append(v)
-					print("cration")
 
 	# permet d'afficher les informations sotckées sur la famille
 	def printFamilyUser(self):
@@ -50,3 +65,4 @@ class User:
 	def printInformationUser(self):
 		print("Vous voulez savoir tout ce qeu je sais sur vous ? très bien, si vous insistez...")
 		self.printFamilyUser()
+		self.printSportUser()

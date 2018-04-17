@@ -324,7 +324,13 @@ def functionWriteFileUpper(filename):
 
 def testNathan():
 	u = user.User("nathan")
-	u.addFamilyMember(check_Coherence("salut tante Nathan", "keyFamily", "valuesNames"))
+	answer = "salut tante Nathan"
+	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
+	u.addFamilyMember(k,v)
+	
+	u.addSport("judo")
+	u.addSport("sauter")
+	u.addSport("sac à dos")
 	u.printInformationUser()
 	
 	# while True :
