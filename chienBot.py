@@ -323,6 +323,7 @@ def functionWriteFileUpper(filename):
 			filepointer.write(t.upper())
 
 def testNathan():
+	functionWriteFileUpper("keySports")
 	u = user.User("nathan")
 	answer = "salut tante Nathan"
 	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
