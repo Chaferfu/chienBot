@@ -311,9 +311,17 @@ def check_Coherence(answer,keyFileName, valueFileName):
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
 	print(dico)
-
 	print(analyzeSentence("Salut haha ouais ki lol", dico))
 	return
+
+def functionWriteFileUpper(filename):
+	tmp = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer.readlines():
+			tmp.append(line.upper())
+	with open(filename, "w") as filepointer:
+		for t in tmp:
+			filepointer.write(t.upper())
 
 def testNathan():
 	answer = "salut tante Nathan"
