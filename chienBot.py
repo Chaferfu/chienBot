@@ -299,7 +299,6 @@ def check_Coherence(answer,keyFileName, valueFileName):
 	answer = answer.split()
 	for word in answer:
 		for k in keys:
-			print(word.upper())
 			if k == word.upper():
 				for w in answer:			
 					for v in values:
@@ -324,11 +323,10 @@ def functionWriteFileUpper(filename):
 			filepointer.write(t.upper())
 
 def testNathan():
-	answer = "salut tante Nathan"
-	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
-	dico = {}
-	dico[k] = v
-	print(dico)
+	u = user.User("nathan")
+	u.addFamilyMember(check_Coherence("salut tante Nathan", "keyFamily", "valuesNames"))
+	u.printInformationUser()
+	
 	# while True :
 	# 	name = input("name pls :\n")
 	# 	if check_Connexion(name, "utilisateurs"):
