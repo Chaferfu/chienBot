@@ -9,6 +9,7 @@ def stockDataInUser(user):
 	with open('Users/' + user.infos[0], "wb") as u:
 		pickle.dump(user, u, protocol = pickle.HIGHEST_PROTOCOL)
 
+
 def readDataFromUser(user):
 	with open('Users/' + user.infos[0], "rb") as u:
 		unserialiazed_data = pickle.load(u)
@@ -337,6 +338,11 @@ def testNathan():
 	
 	u.printInformationUser()
 	
+	stockDataInUser(u)
+
+	u2 = readDataFromUser(u)
+	u2.printInformationUser()
+
 	# while True :
 	# 	name = input("name pls :\n")
 	# 	if check_Connexion(name, "utilisateurs"):
@@ -354,8 +360,8 @@ def testNathan():
 	# 		fichier.close()
 
 def testBrian():
-	if(check_Coherence("J'ai une soeur.", keyFamily, valueFamily)):
-		return
+	if("J'APPRECIE" == "j'apprecie".upper()):
+		print("bite")
 
 if __name__=="__main__":
 	mode = "-1"
