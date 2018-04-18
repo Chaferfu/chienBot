@@ -293,17 +293,20 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
-def check_Coherence(answer,keyFileName, valueFileName):
+def check_Coherence(answer,keyFileName, valueFileName = ""):
 	keys = read_word_list_file(keyFileName)
-	values = read_word_list_file(valueFileName)
+	if valueFileName != "":
+		values = read_word_list_file(valueFileName)
+	answer = removePunctuation(answer)
 	answer = answer.split()
 	for word in answer:
 		for k in keys:
 			if k == word.upper():
-				for w in answer:			
-					for v in values:
-						if v == w.upper():
-							return (k,v)
+				if valueFileName != "":
+					for w in answer:			
+						for v in values:
+							if v == w.upper():
+								return (k,v)
 				return (k,'')
 	return ('','')
 
@@ -324,12 +327,14 @@ def functionWriteFileUpper(filename):
 
 def testNathan():
 	u = user.User("nathan")
+	k,v = check_Coherence("ah je t'avais pas dit que Véronique, ma copine faisait du sport ?", "keyRelation","valuesNames")
+	print(k,v)
+	u.addRelation(k,v)
 	k,v = check_Coherence("salut tante Nathan", "keyFamily", "valuesNames")
 	u.addFamilyMember(k,v)
+	k,v = check_Coherence("j'adore le tennis de table", "keySports")
+	u.addSport(k)
 	
-	u.addSport("judo")
-	u.addSport("sauter")
-	u.addSport("sac à dos")
 	u.printInformationUser()
 	
 	# while True :
