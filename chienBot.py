@@ -299,18 +299,24 @@ def check_Coherence(answer,keyFileName, valueFileName = ""):
 	if valueFileName != "":
 		values = read_word_list_file(valueFileName)
 	answer = removePunctuation(answer)
-	answer = answer.split()
-	for word in answer:
-		for k in keys:
-			if k == word.upper():
-				if valueFileName != "":
-					for w in answer:			
-						for v in values:
-							if v == w.upper():
-								return (k,v)
-				return (k,'')
+
+	for k in keys:
+		if findStringInString(k, answer):
+			if valueFileName != "":			
+				for v in values:
+					if findStringInString(v, answer):
+						return (k,v)
+			return (k,'')
 	return ('','')
 
+def findStringInString(word, phrase):
+	word = word.upper()
+	phrase = phrase.upper()
+	index = phrase.find(word)
+	if index != -1 and (index == 0 or phrase[index-1].isspace()) and (index+len(word) == len(phrase) or phrase[index+len(word)].isspace()):
+		return True
+	else:
+		return False
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
 	print(dico)
@@ -328,7 +334,7 @@ def functionWriteFileUpper(filename):
 
 def testNathan():
 	u = user.User("nathan")
-	k,v = check_Coherence("ah je t'avais pas dit que Véronique, ma copine faisait du sport ?", "keyRelation","valuesNames")
+	k,v = check_Coherence("Véronique, ma copine faisait du sport ?", "keyRelation","valuesNames")
 	print(k,v)
 	u.addRelation(k,v)
 	k,v = check_Coherence("salut tante Nathan", "keyFamily", "valuesNames")

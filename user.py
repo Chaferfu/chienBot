@@ -25,11 +25,11 @@ class User:
 
 	# ajoute un gouts
 	def addGouts(self,k,b):
-
+		return
 
 	# permet d'afficher les informations sotckées sur le gouts
 	def printGoutsUser(self):
-
+		return
 
 	# ajoute un sport
 	def addSport(self,sport):
