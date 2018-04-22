@@ -284,7 +284,7 @@ def reaction(dictThemes, theme, mot):
 	message = message.split("*")
 
 	#print(message)
-#	message = message[0] + fill + message[1]
+	# message = message[0] + fill + message[1]
 	for i in range(0,len(message)-1):
 		reponse = reponse + message[i]
 		reponse = reponse + fill
@@ -294,7 +294,7 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
-def check_Coherence(answer,keyFileName, valueFileName):
+def checkCoherence(answer,keyFileName, valueFileName):
 	keys = read_word_list_file(keyFileName)
 	values = read_word_list_file(valueFileName)
 	answer = answer.split()
@@ -327,7 +327,7 @@ def testNathan():
 	functionWriteFileUpper("keySports")
 	u = user.User("nathan")
 	answer = "salut tante Nathan"
-	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
+	k,v = checkCoherence(answer, "keyFamily", "valuesNames")
 	u.addFamilyMember(k,v)
 	
 	u.addSport("judo")
@@ -357,8 +357,15 @@ def testNathan():
 	# 		fichier.close()
 
 def testBrian():
-	if("J'APPRECIE" == "j'apprecie".upper()):
-		print("bite")
+	u = user.User("Brian")
+
+	text = ""
+	while continuer(text):
+		text = input("Moi                 : ")
+		checkGouts(text)
+		reponse = ""
+		print("Nathanaelle Poilane : " + reponse)
+	return
 
 if __name__=="__main__":
 	mode = "-1"

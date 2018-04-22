@@ -40,7 +40,7 @@ class User:
 		print(".")
 		print("\nEnfin en tout cas c'est tout ce que tu as pu me dire !")
 
-	# ajoute un membre de la famille en fondtion d'une clé k (ex:Tante) et d'une valeur v (ex:George).
+	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
 	def addFamilyMember(self,k,v):
 		if k != "":
@@ -60,6 +60,15 @@ class User:
 				print("(" + name.lower() + ")", end='')
 			print()
 		print("\nEt je crois que c'est à peu près tout...")
+
+	def changeState(self, val):
+		self.etat += val
+
+	def printState(self):
+		if self.etat > 0:
+			print("PPR")
+		else:
+			print("VNR")
 
 	# permet d'afficher l'ensemble des informations stockées
 	def printInformationUser(self):
