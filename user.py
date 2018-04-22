@@ -15,13 +15,21 @@ class User:
 		self.gouts = [[], []]
 
 		# relations :
-		self.rel = {}
+		self.relation = {}
 
 		# etat :
 		self.etat = 0
 
 		# anecdotes
 		self.anecdotes = []
+
+	# ajoute un gouts
+	def addGouts(self,k,b):
+		return
+
+	# permet d'afficher les informations sotckées sur le gouts
+	def printGoutsUser(self):
+		return
 
 	# ajoute un sport
 	def addSport(self,sport):
@@ -30,15 +38,11 @@ class User:
 
 	# permet d'afficher les informations sotckées sur le sport
 	def printSportUser(self):
-		i = 0
-		print("Pour ce qui est de tes activités sportives ? Tu m'as déjà parlé de ", end='')
+		print("Sport  : ")
 		for k in self.sport:	
-			i = i + 1
-			print(("ou encore de " if len(self.sport) <= i else ""), end='')
-			print(k + (", " if len(self.sport) > i else ""), end='')
+			print("\t-" + k.lower())
 			
-		print(".")
-		print("\nEnfin en tout cas c'est tout ce que tu as pu me dire !")
+		print("")
 
 	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
@@ -53,13 +57,33 @@ class User:
 
 	# permet d'afficher les informations sotckées sur la famille
 	def printFamilyUser(self):
-		print("Concernant votre famille, voilà tout ce que je sais :")
+		print("Famille :")
 		for k in self.famille:
-			print("Vous avez",len(self.famille[k]),k.lower()+("s " if len(self.famille[k]) > 1 else " "), end='')
+			print("Nombre ",k.lower()+("s " if len(self.famille[k]) > 1 else " "),len(self.famille[k]), " : ")
 			for name in self.famille[k]:
-				print("(" + name.lower() + ")", end='')
-			print()
-		print("\nEt je crois que c'est à peu près tout...")
+				print("\t-" + name.lower())
+
+		print("")
+	# ajoute une relation en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
+	# si un des deux est nul, il n'y a pas d'ajout.
+	def addRelation(self,k,v):
+		if k != "":
+			if v != "":
+				if k in self.relation:
+					self.relation[k].append(v)
+				else:
+					self.relation[k] = []
+					self.relation[k].append(v)
+
+	# permet d'afficher les informations sotckées sur la relation
+	def printRelationUser(self):
+		print("Relations :")
+		for k in self.relation:
+			print("Nombre ",k.lower()+("s " if len(self.relation[k]) > 1 else " "),len(self.relation[k]), " : ")
+			for name in self.relation[k]:
+				print("\t-" + name.lower())
+
+		print("")
 
 	def changeState(self, val):
 		self.etat += val
@@ -72,6 +96,7 @@ class User:
 
 	# permet d'afficher l'ensemble des informations stockées
 	def printInformationUser(self):
-		print("Vous voulez savoir tout ce qeu je sais sur vous ? très bien, si vous insistez...")
+		print("Information User ", self.infos[0])
 		self.printFamilyUser()
 		self.printSportUser()
+		self.printRelationUser()

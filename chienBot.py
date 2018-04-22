@@ -294,20 +294,33 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
+<<<<<<< HEAD
 def checkCoherence(answer,keyFileName, valueFileName):
+=======
+def check_Coherence(answer,keyFileName, valueFileName = ""):
+>>>>>>> 190a06bb29db854492fbe69627feaffd8135d3d0
 	keys = read_word_list_file(keyFileName)
-	values = read_word_list_file(valueFileName)
-	answer = answer.split()
-	for word in answer:
-		for k in keys:
-			if k == word.upper():
-				for w in answer:			
-					for v in values:
-						if v == w.upper():
-							return (k,v)
-				return (k,'')
+	if valueFileName != "":
+		values = read_word_list_file(valueFileName)
+	answer = removePunctuation(answer)
+
+	for k in keys:
+		if findStringInString(k, answer):
+			if valueFileName != "":			
+				for v in values:
+					if findStringInString(v, answer):
+						return (k,v)
+			return (k,'')
 	return ('','')
 
+def findStringInString(word, phrase):
+	word = word.upper()
+	phrase = phrase.upper()
+	index = phrase.find(word)
+	if index != -1 and (index == 0 or phrase[index-1].isspace()) and (index+len(word) == len(phrase) or phrase[index+len(word)].isspace()):
+		return True
+	else:
+		return False
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
 	print(dico)
@@ -324,15 +337,20 @@ def functionWriteFileUpper(filename):
 			filepointer.write(t.upper())
 
 def testNathan():
-	functionWriteFileUpper("keySports")
 	u = user.User("nathan")
+<<<<<<< HEAD
 	answer = "salut tante Nathan"
 	k,v = checkCoherence(answer, "keyFamily", "valuesNames")
+=======
+	k,v = check_Coherence("Véronique, ma copine faisait du sport ?", "keyRelation","valuesNames")
+	print(k,v)
+	u.addRelation(k,v)
+	k,v = check_Coherence("salut tante Nathan", "keyFamily", "valuesNames")
+>>>>>>> 190a06bb29db854492fbe69627feaffd8135d3d0
 	u.addFamilyMember(k,v)
+	k,v = check_Coherence("j'adore le tennis de table", "keySports")
+	u.addSport(k)
 	
-	u.addSport("judo")
-	u.addSport("sauter")
-	u.addSport("sac à dos")
 	u.printInformationUser()
 	
 	stockDataInUser(u)
