@@ -82,17 +82,18 @@ def stock_Words_And_Questions(filename):
 	theme = ""
 	with open(filename, "r") as filepointer:
 		for line in filepointer:
-			line = line.strip()
-			if line[0] in ['£','@']:
-				key = line[0]
-				if key == '£':
-					theme = line[1:]
-					dictThemes[theme] = ([], [])				
-			elif(key == '£'):
-	#			line = line.replace(' ', '')
-				dictThemes[theme][0].append(line.lower().split('|'))
-			elif(key == '@'):
-				dictThemes[theme][1].append(line)
+			#if line[0] != '#':
+				line = line.strip()
+				if line[0] in ['£','@']:
+					key = line[0]
+					if key == '£':
+						theme = line[1:]
+						dictThemes[theme] = ([], [])				
+				elif(key == '£'):
+					#line = line.replace(' ', '')
+					dictThemes[theme][0].append(line.lower().split('|'))
+				elif(key == '@'):
+					dictThemes[theme][1].append(line)
 	return dictThemes
 
 def mode1():
@@ -191,7 +192,10 @@ def findThemes(line, dico):
 		for w in valeur[0]:
 			for variante in w:
 				#print(" is " + variante + " in line ? : ")
-				if variante != '' and variante.strip() in line.lower():
+				#if variante != '' and variante.strip() in line.lower(): #cette ligne marchait avant ais nathan est iperialiste il veut quo tilise sa fonction partout
+				# if variante.strip() == "chien":
+				# 	print("is chien in " + line + "? : " + str(findStringInString(variante.strip(),line)))
+				if findStringInString(variante, line):
 					#print("yes")
 					# print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
 					
@@ -293,30 +297,40 @@ def reaction(dictThemes, theme, mot):
 	reac = random.choice(dictThemes[theme][1])
 	reac = reac.split('|')
 	message = reac[0].strip()
-	genre = reac[1].strip()
-	reponse = ""
-	if genre == 'ms':
-		fill = mot[0]
-	elif genre == 'fs':
-		fill = mot[1]
-	elif genre == 'mp':
-		fill = mot[2]
-	elif genre == 'fp':
-		fill = mot[3]
-	else:
-		print("oula ca bug erreur dans le ficher mode2 certainement\n")
-	message = message.split("*")
+	fills = reac[1:]
+
+	while '*' in message and 0 < len(fills):
+		if ',' in fills[0]:
+			message = message.replace("*", fills[0],1)
+		else:
+			print()
+			if "ms" in fills[0]:
+				message = message.replace("*", mot[0].strip(), 1)
+			elif "fs" in fills[0]:
+				message = message.replace("*", mot[1].strip(), 1)
+			elif "mp" in fills[0]:
+				message = message.replace("*", mot[2].strip(), 1)
+			elif "fp" in fills[0]:
+				message = message.replace("*", mot[3].strip(), 1)
+			else:
+				print("#######ERREUR certainement dans le fichier mode2")
+
+		fills.pop(0)
+
+	#message = message.split("*")
 
 	#print(message)
-#	message = message[0] + fill + message[1]
-	for i in range(0,len(message)-1):
-		reponse = reponse + message[i]
-		reponse = reponse + fill.strip()
+	#message = message[0] + fill + message[1]
+	# for i in range(0,len(message)-1):
+	# 	reponse = reponse + message[i]
+	# 	reponse = reponse + fill.strip()
 		#print("iteratio :" + str(i) + "reponse = " + reponse)
 
-	reponse = reponse + message[-1]
+	#reponse = reponse + message[-1]
 
-	return reponse
+
+
+	return message
 
 def check_Coherence(answer,keyFileName, valueFileName = ""):
 	keys = read_word_list_file(keyFileName)
@@ -334,7 +348,7 @@ def check_Coherence(answer,keyFileName, valueFileName = ""):
 	return ('','')
 
 def findStringInString(word, phrase):
-	word = word.upper()
+	word = word.upper().strip()
 	phrase = phrase.upper()
 	index = phrase.find(word)
 	if index != -1 and (index == 0 or phrase[index-1].isspace()) and (index+len(word) == len(phrase) or phrase[index+len(word)].isspace()):
