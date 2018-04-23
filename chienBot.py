@@ -132,11 +132,22 @@ def mode2():
 	return
 
 def mode3():
+	name = input("name pls :\n")
+	u = user.User(name)
+	if check_Connexion(name, "utilisateurs"):
+		print("Oh content de te revoir ", name)
+		u = readDataFromUser(u)
+	else:
+		print("Enchanté ", name)
+	text = ""
 	while continuer(text):
-
 		text = input("Moi                 : ")
 		reponse = ""
+		getInformationFromAnswer(text, u)
 		print("Nathanaelle Poilane : " + reponse)
+	stockDataInUser(u)
+	tmp = readDataFromUser(u)
+	tmp.printInformationUser()
 	return
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
@@ -284,7 +295,7 @@ def reaction(dictThemes, theme, mot):
 	message = message.split("*")
 
 	#print(message)
-	# message = message[0] + fill + message[1]
+#	message = message[0] + fill + message[1]
 	for i in range(0,len(message)-1):
 		reponse = reponse + message[i]
 		reponse = reponse + fill
@@ -294,11 +305,7 @@ def reaction(dictThemes, theme, mot):
 
 	return reponse
 
-<<<<<<< HEAD
-def checkCoherence(answer,keyFileName, valueFileName):
-=======
 def check_Coherence(answer,keyFileName, valueFileName = ""):
->>>>>>> 190a06bb29db854492fbe69627feaffd8135d3d0
 	keys = read_word_list_file(keyFileName)
 	if valueFileName != "":
 		values = read_word_list_file(valueFileName)
@@ -336,27 +343,28 @@ def functionWriteFileUpper(filename):
 		for t in tmp:
 			filepointer.write(t.upper())
 
+def getInformationFromAnswer(answer, u):
+	k,v = check_Coherence(answer, "keyRelation","valuesNames")
+	u.addRelation(k,v)
+	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
+	u.addFamilyMember(k,v)
+	k,v = check_Coherence(answer, "keySports")
+	u.addSport(k)
+	with open("fichiersGouts", "r") as filepointer:
+		for line in filepointer.readlines():
+			line = line.split()
+			k,v = check_Coherence(answer, "like", line[0])
+			u.addLike(k,v)
+			k,v = check_Coherence(answer, "dislike", line[0])
+			u.addDislike(k,v)
+	u.printInformationUser()
+
 def testNathan():
 	u = user.User("nathan")
-<<<<<<< HEAD
-	answer = "salut tante Nathan"
-	k,v = checkCoherence(answer, "keyFamily", "valuesNames")
-=======
-	k,v = check_Coherence("Véronique, ma copine faisait du sport ?", "keyRelation","valuesNames")
-	print(k,v)
-	u.addRelation(k,v)
-	k,v = check_Coherence("salut tante Nathan", "keyFamily", "valuesNames")
->>>>>>> 190a06bb29db854492fbe69627feaffd8135d3d0
-	u.addFamilyMember(k,v)
-	k,v = check_Coherence("j'adore le tennis de table", "keySports")
-	u.addSport(k)
-	
-	u.printInformationUser()
+	getInformationFromAnswer("j'aime nathan", u)
 	
 	stockDataInUser(u)
-
 	u2 = readDataFromUser(u)
-	u2.printInformationUser()
 
 	# while True :
 	# 	name = input("name pls :\n")
@@ -375,15 +383,8 @@ def testNathan():
 	# 		fichier.close()
 
 def testBrian():
-	u = user.User("Brian")
-
-	text = ""
-	while continuer(text):
-		text = input("Moi                 : ")
-		checkGouts(text)
-		reponse = ""
-		print("Nathanaelle Poilane : " + reponse)
-	return
+	if("J'APPRECIE" == "j'apprecie".upper()):
+		print("bite")
 
 if __name__=="__main__":
 	mode = "-1"
