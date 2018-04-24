@@ -196,38 +196,6 @@ def removePunctuation(line):
 
 	return line
 
-# Li
-# def analyzeSentence(line, dico):
-# 	nbOcc = {}
-# 	wordsInTheme = {}
-# 	theme = ""
-# 	genre = ""
-# 	for key in dico.keys():
-# 		wordsInTheme[key] = []
-# 		nbOcc[key] = 0
-# 		print(key)
-# 	line = removePunctuation(line)
-# 	words = line.split(' ')
-# 	print(words)
-# 	for word in words:
-# 		print(word)
-# 		#print("HEEEY")
-# 		#print(findTheme(word, dico))
-# 		theme, wordArray = findTheme(word, dico)
-# 		if(theme != "mot absent"):
-# 			print("Theme trouv : " + theme)
-# 			nbOcc[theme] += 1
-# 			wordsInTheme[theme].append(wordArray)
-
-
-# 	bestOcc = max([ nbOcc[k] for k in nbOcc])
-# 	for k, v in nbOcc.items():
-# 		print("#################")
-# 		print(k, v)
-
-# 	for k in nbOcc.keys():
-# 		if nbOcc[k] == bestOcc:
-# 			return k, random.choice(wordsInTheme[k]),genre
 
 def analyzeSentence(line, dico):
 	nbOcc = {}
@@ -295,7 +263,7 @@ def reaction(dictThemes, theme, mot):
 	message = message.split("*")
 
 	#print(message)
-#	message = message[0] + fill + message[1]
+	#	message = message[0] + fill + message[1]
 	for i in range(0,len(message)-1):
 		reponse = reponse + message[i]
 		reponse = reponse + fill
@@ -328,6 +296,7 @@ def findStringInString(word, phrase):
 		return True
 	else:
 		return False
+
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
 	print(dico)
@@ -350,6 +319,7 @@ def getInformationFromAnswer(answer, u):
 	u.addFamilyMember(k,v)
 	k,v = check_Coherence(answer, "keySports")
 	u.addSport(k)
+	checkMood(answer, u)
 	with open("fichiersGouts", "r") as filepointer:
 		for line in filepointer.readlines():
 			line = line.split()
@@ -358,6 +328,24 @@ def getInformationFromAnswer(answer, u):
 			k,v = check_Coherence(answer, "dislike", line[0])
 			u.addDislike(k,v)
 	u.printInformationUser()
+
+def checkMood(answer, user):
+	k, v = check_Coherence(answer, "Mood/joie")
+	if (k, v) != ('', ''):
+		user.etat += 3
+	k, v = check_Coherence(answer, "Mood/tranquillite")
+	if (k, v) != ('', ''):
+		user.etat += 1
+	k, v = check_Coherence(answer, "Mood/tristesse")
+	if (k, v) != ('', ''):
+		user.etat -= 2
+	k, v = check_Coherence(answer, "Mood/colere")
+	if (k, v) != ('', ''):
+		user.etat -= 3
+	k, v = check_Coherence(answer, "Mood/degout")
+	if (k, v) != ('', ''):
+		user.etat -= 1
+	print(user.etat)
 
 def testNathan():
 	u = user.User("nathan")
@@ -382,9 +370,17 @@ def testNathan():
 
 	# 		fichier.close()
 
+def writeFileWithoutDeterminants(filename):
+	tmp = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer.readlines():
+			tmp.append(line)
+	with open(filename, "w") as filepointer:
+		for t in tmp:
+			filepointer.write(t.lstrip("la ").lstrip("le ").lstrip("l\'").lstrip("les "))
+
 def testBrian():
-	if("J'APPRECIE" == "j'apprecie".upper()):
-		print("bite")
+	mode3()
 
 if __name__=="__main__":
 	mode = "-1"

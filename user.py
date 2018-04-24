@@ -95,6 +95,15 @@ class User:
 
 		print("")
 
+	def changeMood(self, val):
+		self.etat += val
+
+	def getMood(self):
+		if etat >= 0:
+			return "PPR"
+		if etat < 0:
+			return "VNR"
+
 	# permet d'afficher l'ensemble des informations stockées
 	def printInformationUser(self):
 		print("Information User ", self.infos[0])
