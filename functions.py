@@ -91,6 +91,7 @@ def calou():
 	return
 
 def check_Coherence(answer,keyFileName, valueFileName = ""):
+	tmp = ([], [])
 	keys = read_word_list_file(keyFileName)
 	if valueFileName != "":
 		values = read_word_list_file(valueFileName)
@@ -98,12 +99,12 @@ def check_Coherence(answer,keyFileName, valueFileName = ""):
 
 	for k in keys:
 		if findStringInString(k, answer):
-			if valueFileName != "":			
-				for v in values:
-					if findStringInString(v, answer):
-						return (k,v)
-			return (k,'')
-	return ('','')
+			tmp[0].append(k)
+	if valueFileName != "":			
+		for v in values:
+			if findStringInString(v, answer):
+					tmp[1].append(v)
+	return tmp
 
 # Au début du mode 3, cherche si l'utilisateur est déjà connu
 def check_Connexion(name, filename):
@@ -180,8 +181,6 @@ def functionWriteFileUpper(filename):
 def getInformationFromAnswer(answer, u):
 	k,v = check_Coherence(answer, "keyRelation","valuesNames")
 	u.addRelation(k,v)
-	k,v = check_Coherence(answer, "keyFamily", "valuesNames")
-	u.addFamilyMember(k,v)
 	k,v = check_Coherence(answer, "keySports")
 	u.addSport(k)
 	checkMood(answer, u)

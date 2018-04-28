@@ -1,4 +1,5 @@
-import functions.py
+from functions import *
+from user import *
 
 def mode1():
 	calou()
@@ -38,7 +39,7 @@ def mode2():
 
 def mode3():
 	name = input("name pls :\n")
-	u = user.User(name)
+	u = User(name)
 	if check_Connexion(name, "utilisateurs"):
 		print("Oh content de te revoir ", name)
 		u = readDataFromUser(u)
@@ -62,7 +63,7 @@ def testMathias():
 	return
 
 def testNathan():
-	u = user.User("Nathanaelle")
+	u = User("Nathanaelle")
 	getInformationFromAnswer("frère germain", u)
 	print(u.findSomeone("germain"))
 	stockDataInUser(u)
