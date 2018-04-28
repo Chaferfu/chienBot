@@ -321,13 +321,16 @@ def check_Coherence(answer,keyFileName, valueFileName = ""):
 	return ('','')
 
 def findStringInString(word, phrase):
-	word = word.upper()
+	phrase = removePunctuation(phrase)
+	word = removePunctuation(word)
+	word = word.upper().strip()
 	phrase = phrase.upper()
 	index = phrase.find(word)
 	if index != -1 and (index == 0 or phrase[index-1].isspace()) and (index+len(word) == len(phrase) or phrase[index+len(word)].isspace()):
 		return True
 	else:
 		return False
+
 def testMathias():
 	dico = stock_Words_And_Questions("mode2")
 	print(dico)
@@ -360,9 +363,9 @@ def getInformationFromAnswer(answer, u):
 	u.printInformationUser()
 
 def testNathan():
-	u = user.User("nathan")
-	getInformationFromAnswer("j'aime nathan", u)
-	
+	u = user.User("Nathanaelle")
+	getInformationFromAnswer("frère germain", u)
+	print(u.findSomeone("germain"))
 	stockDataInUser(u)
 	u2 = readDataFromUser(u)
 

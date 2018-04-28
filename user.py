@@ -1,3 +1,5 @@
+import chienBot as c
+
 class User:
 	
 	def __init__(self, prenom):
@@ -22,6 +24,20 @@ class User:
 
 		# anecdotes
 		self.anecdotes = []
+
+
+	def findSomeone(self, nom):
+		for key,valeur in self.famille.items():
+			if nom.upper() in valeur:
+				return key
+		for key,valeur in self.relation.items():
+			if nom.upper() in valeur:
+				return key
+		return
+	
+	def findSport(self, sport):
+		if sport.upper() in self.sport:
+			return True;
 
 	# ajoute un gouts
 	def addDislike(self,k,b):
@@ -54,12 +70,32 @@ class User:
 		for k in self.sport:	
 			print("\t-" + k.lower())
 			
+	def askQuestionToCompleteAnswer(self,question, fileWordToUnderstand, element = None, x = None):
+		words = []
+		with open("valuesNames", "r") as filepointer:
+			for line in filepointer.readlines():
+				words.append(line)
+		if(element != None and x != None):
+			question.replace(x, element)
+
+		print("Nathanaelle Poilane : " + question)
+		text = input("Moi                 : ")
+		for w in words:
+			if c.findStringInString(w, text):
+				return w
+		return ""
 
 	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
 	def addFamilyMember(self,k,v):
-		if k != "":
-			if v != "":
+		print("add family ez")
+		if k != "" or v != "":
+			if v == "":
+				v = self.askQuestionToCompleteAnswer("Oh vraiment, tu as une belle famille, c'est quoi son nom ?","valuesNames")
+				print(v)
+			elif k == "":
+				k = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyFamily", v, "*")
+			if k != "" and v != "" :
 				if k in self.famille:
 					self.famille[k].append(v)
 				else:
