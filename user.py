@@ -37,15 +37,17 @@ class User:
 
 	# ajoute un gout
 	def addDislike(self,k,b):
-		for a in b:
-			if a not in self.gouts[1] and a != '':
-				self.gouts[1].append(a)
+		if k:
+			for a in b:
+				if a not in self.gouts[1] and a != '':
+					self.gouts[1].append(a)
 
 	# ajoute un gout
 	def addLike(self,k,b):
-		for a in b:
-			if a not in self.gouts[0] and a != '':
-				self.gouts[0].append(b)
+		if k:
+			for a in b:
+				if a not in self.gouts[0] and a != '':
+					self.gouts[0].append(a)
 
 	# permet d'afficher les informations stockées sur le gout
 	def printGoutsUser(self):
@@ -83,22 +85,22 @@ class User:
 		for w in words:
 			if f.findStringInString(w, text):
 				return w
-		return ""
+		return "Inconnu"
 
 	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
 	def addRelation(self,k,v):
-		for a, b in itertools.zip_longest(k,v):
-			if a == None:
-				a = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
-			elif b == None:
-				b = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", v, "*")
-			if a != None and b != None:
-				if a in self.relation:
-					self.relation[a].append(b)
+		for rel, nom in itertools.zip_longest(k,v):
+			if nom == None:
+				nom = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
+			elif rel == None:
+				rel = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", nom, "*")
+			if nom != None and rel != None:
+				if rel in self.relation:
+					self.relation[rel].append(nom)
 				else:
-					self.relation[a] = []
-					self.relation[a].append(b)
+					self.relation[rel] = []
+					self.relation[rel].append(nom)
 
 		# if k != "" or v != "":
 		# 	if v == "":
