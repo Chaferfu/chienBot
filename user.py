@@ -37,15 +37,17 @@ class User:
 
 	# ajoute un gouts
 	def addDislike(self,k,b):
-		for a in b:
-			if a not in self.gouts[1] and a != '':
-				self.gouts[1].append(a)
+		if k:
+			for a in b:
+				if a not in self.gouts[1] and a != '':
+					self.gouts[1].append(a)
 
 	# ajoute un gouts
 	def addLike(self,k,b):
-		for a in b:
-			if a not in self.gouts[0] and a != '':
-				self.gouts[0].append(b)
+		if k:
+			for a in b:
+				if a not in self.gouts[0] and a != '':
+					self.gouts[0].append(a)
 
 	# permet d'afficher les informations sotckées sur le gouts
 	def printGoutsUser(self):
