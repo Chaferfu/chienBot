@@ -85,7 +85,7 @@ class User:
 		for w in words:
 			if f.findStringInString(w, text):
 				return w
-		return ""
+		return "Inconnu"
 
 	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
