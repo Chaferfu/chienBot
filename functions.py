@@ -188,7 +188,6 @@ def getInformationFromAnswer(answer, u):
 		for line in filepointer.readlines():
 			line = line.split()
 			k,v = check_Coherence(answer, "like", line[0])
-			print("res : ", k, v)
 			u.addLike(k,v)
 			k,v = check_Coherence(answer, "dislike", line[0])
 			u.addDislike(k,v)
