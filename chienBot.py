@@ -124,6 +124,7 @@ def mode2():
 		else:
 			reponse = reaction(dico, themeDetecte, motDetecte)
 			while reponse == derniere:
+				print("DEBUG : meme message, je reconstruis une nouvelle reaction")
 				reponse = reaction(dico, themeDetecte, motDetecte)
 
 
@@ -294,16 +295,20 @@ def removePunctuation(line):
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
 
+
 	reac = random.choice(dictThemes[theme][1])
 	reac = reac.split('|')
 	message = reac[0].strip()
 	fills = reac[1:]
 
+	# print("DEBUG : reaction choisie : " + message)
+	# print("DEBUG : fills : " + str(fills))
+
 	while '*' in message and 0 < len(fills):
 		if ',' in fills[0]:
 			message = message.replace("*", fills[0],1)
 		else:
-			print()
+			# print()
 			if "ms" in fills[0]:
 				message = message.replace("*", mot[0].strip(), 1)
 			elif "fs" in fills[0]:
