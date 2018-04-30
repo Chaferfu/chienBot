@@ -35,27 +35,27 @@ class User:
 		if sport.upper() in self.sport:
 			return True;
 
-	# ajoute un gouts
+	# ajoute un gout
 	def addDislike(self,k,b):
 		for a in b:
 			if a not in self.gouts[1] and a != '':
 				self.gouts[1].append(a)
 
-	# ajoute un gouts
+	# ajoute un gout
 	def addLike(self,k,b):
 		for a in b:
 			if a not in self.gouts[0] and a != '':
 				self.gouts[0].append(b)
 
-	# permet d'afficher les informations sotckées sur le gouts
+	# permet d'afficher les informations stockées sur le gout
 	def printGoutsUser(self):
 		print("Goûts  : ")
 		print("Like : ")
 		for k in self.gouts[0]:	
-			print("\t-" + k.lower())
+			print("\t-" + str(k).lower())
 		print("Dislike : ")
 		for k in self.gouts[1]:	
-			print("\t-" + k.lower())	
+			print("\t-" + str(k).lower())	
 
 	# ajoute un sport
 	def addSport(self,sport):

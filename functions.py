@@ -183,7 +183,7 @@ def getInformationFromAnswer(answer, u):
 	u.addRelation(k,v)
 	k,v = check_Coherence(answer, "keySports")
 	u.addSport(k)
-	checkMood(answer, u)
+	#checkMood(answer, u)
 	with open("fichiersGouts", "r") as filepointer:
 		for line in filepointer.readlines():
 			line = line.split()
