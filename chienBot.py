@@ -82,7 +82,7 @@ def stock_Words_And_Questions(filename):
 	theme = ""
 	with open(filename, "r") as filepointer:
 		for line in filepointer:
-			#if line[0] != '#':
+			if line[0] != '#':
 				line = line.strip()
 				if line[0] in ['£','@']:
 					key = line[0]
@@ -306,19 +306,66 @@ def reaction(dictThemes, theme, mot):
 
 	while '*' in message and 0 < len(fills):
 		if ',' in fills[0]:
-			message = message.replace("*", fills[0],1)
-		else:
-			# print()
-			if "ms" in fills[0]:
-				message = message.replace("*", mot[0].strip(), 1)
-			elif "fs" in fills[0]:
-				message = message.replace("*", mot[1].strip(), 1)
-			elif "mp" in fills[0]:
-				message = message.replace("*", mot[2].strip(), 1)
-			elif "fp" in fills[0]:
-				message = message.replace("*", mot[3].strip(), 1)
+			determinant = fills[0].split(' ')[0].strip()
+			# print("DEBUG   determinant : " + str(determinant))
+			determinant = determinant.split(',')
+
+
+			print("DEBUG    determinant : " + str(determinant))
+			# print(str(fills[0]))
+
+			fill = fills[0].split(' ')[1].strip()
+
+			print("DEBUG    fill : " + fill)
+
+			if "ms" in fill:
+				if '¤' not in mot[0]:
+					message = message.replace("*", determinant[0] + " " + mot[0].strip(), 1)
+				else:
+					message = message.replace("*", determinant[1] + " " + mot[1].strip(), 1)
+			elif "fs" in fill:
+				if '¤' not in mot[1]:
+					message = message.replace("*", determinant[1] + " " + mot[1].strip(), 1)
+				else:
+					message = message.replace("*", determinant[0] + " " + mot[0].strip(), 1)
+			elif "mp" in fill:
+				if '¤' not in mot[2]:
+					message = message.replace("*", determinant[0] + " " + mot[2].strip(), 1)
+				else:
+					message = message.replace("*", determinant[1] + " " + mot[3].strip(), 1)
+			elif "fp" in fill:
+				if '¤' not in mot[3]:
+					message = message.replace("*", determinant[1] + " " + mot[3].strip(), 1)
+				else:
+					message = message.replace("*", determinant[0] + " " + mot[2].strip(), 1)
 			else:
 				print("#######ERREUR certainement dans le fichier mode2")
+
+
+		else:
+			if "ms" in fills[0]:
+				if '¤' not in mot[0]:
+					message = message.replace("*", mot[0].strip(), 1)
+				else:
+					message = message.replace("*", mot[1].strip(), 1)
+			elif "fs" in fills[0]:
+				if '¤' not in mot[1]:
+					message = message.replace("*", mot[1].strip(), 1)
+				else:
+					message = message.replace("*", mot[0].strip(), 1)
+			elif "mp" in fills[0]:
+				if '¤' not in mot[2]:
+					message = message.replace("*", mot[2].strip(), 1)
+				else:
+					message = message.replace("*", mot[3].strip(), 1)
+			elif "fp" in fills[0]:
+				if '¤' not in mot[3]:
+					message = message.replace("*", mot[3].strip(), 1)
+				else:
+					message = message.replace("*", mot[2].strip(), 1)
+			else:
+				print("#######ERREUR certainement dans le fichier mode2")
+
 
 		fills.pop(0)
 
