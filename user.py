@@ -29,11 +29,12 @@ class User:
 		for key,valeur in self.relation.items():
 			if nom.upper() in valeur:
 				return key
-		return
+		return ""
 	
 	def findSport(self, sport):
-		if sport.upper() in self.sport:
-			return True;
+		for a in sport:
+			if a.upper() in self.sport:
+				return True;
 
 	# ajoute un gout
 	def addDislike(self,k,b):
@@ -63,7 +64,7 @@ class User:
 	def addSport(self,sport):
 		for a in sport:
 			if a not in self.sport and a != '':
-				self.sport.append(sport)
+				self.sport.append(a)
 
 	# permet d'afficher les informations sotckées sur le sport
 	def printSportUser(self):
@@ -73,12 +74,12 @@ class User:
 			
 	def askQuestionToCompleteAnswer(self,question, fileWordToUnderstand, element = None, x = None):
 		words = []
-		with open("valuesNames", "r") as filepointer:
+		with open(fileWordToUnderstand, "r") as filepointer:
 			for line in filepointer.readlines():
 				line = line.strip()
 				words.append(line)
 		if(element != None and x != None):
-			question.replace(x, element)
+			question = question.replace(x, element.lower())
 
 		print("Nathanaelle Poilane : " + question)
 		text = input("Moi                 : ")
@@ -91,16 +92,28 @@ class User:
 	# si un des deux est nul, il n'y a pas d'ajout.
 	def addRelation(self,k,v):
 		for rel, nom in itertools.zip_longest(k,v):
-			if nom == None:
-				nom = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
-			elif rel == None:
-				rel = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", nom, "*")
-			if nom != None and rel != None:
-				if rel in self.relation:
-					self.relation[rel].append(nom)
-				else:
-					self.relation[rel] = []
-					self.relation[rel].append(nom)
+			if (nom != None and self.findSomeone(nom) == "") or nom == None:
+				if nom == None:
+					nom = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
+				elif rel == None:
+					rel = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", nom, "*")
+				if nom != None and rel != None:
+					if rel not in self.relation:
+						self.relation[rel] = []
+					if nom not in self.relation[rel]:
+						self.relation[rel].append(nom)
+			elif nom != None and rel == None:
+				words = []
+				with open("relationAnswer", "r") as filepointer:
+					for line in filepointer.readlines():
+						line = line.strip()
+						words.append(line)
+
+				key = self.findSomeone(nom)
+				for w in words:
+					if f.findStringInString(key, w):
+						print("Nathanaelle Poilane : " + "Oh, " + nom.lower() + ", "+ w.lower() + " ?")
+						text = input("Moi                 : ")
 
 		# if k != "" or v != "":
 		# 	if v == "":
