@@ -138,7 +138,7 @@ def checkMood(answer, user):
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
 def continuer(text):
-	if(text.find("Au revoir") == 0 or text.find("Bye") == 0 or text.find("Adieu") == 0):
+	if(text.lower().find("au revoir") == 0 or text.lower().find("Bye") == 0 or text.lower().find("Adieu") == 0):
 		return False
 	return True
 

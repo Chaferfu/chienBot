@@ -1,5 +1,6 @@
 from functions import *
 from user import *
+import sys
 
 def mode1():
 	calou()
@@ -89,24 +90,26 @@ def testBrian():
 	mode3()
 
 if __name__=="__main__":
-	mode = "-1"
-	while(int(mode) != 4):
-		while ((int(mode) < 0) or (int(mode) > 7)): 
-			mode = input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) ");
-		if(int(mode) == 0):
+	mode = int(sys.argv[1])
+	print(mode)
+
+	while(mode != 4):
+		while (mode < 0 or mode > 7): 
+			mode = int(input("Choisissez un mode entre 0, 1, 2 et 3 (4 pour quitter) "));
+		if(mode == 0):
 			calou();
-		elif(int(mode) == 1):
+		elif(mode == 1):
 			mode1();
-		elif(int(mode) == 2):
+		elif(mode == 2):
 			mode2();
-		elif(int(mode) == 3):
+		elif(mode == 3):
 			mode3();
-		elif(int(mode) == 4):
+		elif(mode == 4):
 			testMathias();
-		elif(int(mode) == 5):
+		elif(mode == 5):
 			testNathan();
-		elif(int(mode) == 6):
+		elif(mode == 6):
 			testBrian();
 		else:
 			break;
-		mode = "-1"
+		mode = -1
