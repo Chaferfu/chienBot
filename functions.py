@@ -1,6 +1,6 @@
 from random import randint, uniform
 import random 
-from time import sleep
+from time import sleep, time
 import os
 import pickle
 import user
@@ -138,7 +138,7 @@ def checkMood(answer, user):
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
 def continuer(text):
-	if(text.lower().find("au revoir") == 0 or text.lower().find("Bye") == 0 or text.lower().find("Adieu") == 0):
+	if(text.lower().find("au revoir") == 0 or text.lower().find("bye") == 0 or text.lower().find("adieu") == 0):
 		return False
 	return True
 
@@ -192,6 +192,36 @@ def getInformationFromAnswer(answer, u):
 			k,v = check_Coherence(answer, "dislike", line[0])
 			u.addDislike(k,v)
 	u.printInformationUser()
+
+def jeSuis(line):
+	line = removeQuantifiers(line)
+	print(line)
+	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
+	if index  != -1:
+		reponse = "Pourquoi es-tu " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	index = removePunctuation(removeQuantifiers(line.lower())).find("je serai ")
+	if index != -1:
+		reponse = "Pourquoi seras-tu " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	index = removePunctuation(removeQuantifiers(line.lower())).find("j'étais ")
+	if index != -1:
+		reponse = "Pourquoi étais-tu " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	index = removePunctuation(removeQuantifiers(line.lower())).find("je fus ")
+	if index != -1:
+		reponse = "Pourquoi fus-tu " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	index = removePunctuation(removeQuantifiers(line.lower())).find("j'ai été ")
+	if index != -1:
+		reponse = "Pourquoi as-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	index = removePunctuation(removeQuantifiers(line.lower())).find("j'avais été' ")
+	if index != -1:
+		reponse = "Pourquoi avais-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		return "yes", reponse
+	return "no", ""
+
 
 # Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
@@ -252,6 +282,21 @@ def removePunctuation(line):
 
 	return line
 
+def removeQuantifiers(line):
+	words = read_word_list_file("quantifieurs")
+	for w in words:
+		print(w)
+		line = line.replace(str(w), "")
+	"""with open("quantifieurs", "r") as filepointer:
+		for word in filepointer.readlines():
+			if line.find(word) != -1:
+				print("found")
+			else:
+				print(":(")
+			line = line.replace(str(word), "")
+"""
+	return line
+
 # Renvoie une reponse plutot nulle et non constructive
 def reponseNulle(tabMots, tabMotsrares):
 	rng = randint(1,3)
@@ -287,10 +332,22 @@ def stock_Words_And_Questions(filename):
 				key = line[0]
 				if key == '£':
 					theme = line[1:]
-					dictThemes[theme] = ([], [])				
+					dictThemes[theme] = ([], [])			
 			elif(key == '£'):
 	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
 	return dictThemes
+
+def getRandomPhraseFrom(filename, wordToChange, expressionToChange, wordToChange2 = None, expressionToChange2 = None):
+	phrase = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer:
+			line = line.strip()
+			phrase.append(line)
+	finalPhrase = random.choice(phrase)
+	finalPhrase = finalPhrase.replace(expressionToChange, wordToChange)
+	if expressionToChange2 != None:
+		finalPhrase = finalPhrase.replace(expressionToChange2, wordToChange2)
+	return finalPhrase
