@@ -1,49 +1,49 @@
 £animaux
 dauphin|dauphine|dauphins|dauphines
 chien |chienne | chiens |chiennes
+rhinopithèque de Stryker | rhinopithèque de Stryker | rhinopithèques de Stryker| rhinopithèques de Stryker
 chat |chatte | chats |chattes
-souris|souris |souris|souris
-belette |||
-girafe |||
-suricate |||
-lama |||
-aigle |||
-alpaga |||
-antilope |||
-sphynx |||
-fouine |||
-marabout |||
-mante|||
-buffle |||
-orque |||
-troglodyte|||
-ouaouaron |||
-ours | oursette | ours |oursettes
-iguane | iguanette | iguanes|iguanettes
-cachalot | cachalotte|cachalots|cachalottes
-panda roux |||
-perche |||
-chamois |||
-bouc |chèvre|boucs|chèvres
-chouette |||
-lézard |||
-poule |||
-coq |||
-loup |||
-oiseau |||
-mammifère |||
-couleuvre |||
-rhinocéros |||
-poisson mouton |||
-mouton |||
-rhinopithèque de Stryker | rhinopithèquette de Mme Stryker | rhinopitèques de Stryker| c'est trop long
+¤|souris |¤|souris
+¤ |belette|¤|belettes
+# girafe |||
+# suricate |||
+# lama |||
+# aigle |||
+# alpaga |||
+# antilope |||
+# sphynx |||
+# fouine |||
+# marabout |||
+# mante|||
+# buffle |||
+# orque |||
+# troglodyte|||
+# ouaouaron |||
+# ours | oursette | ours |oursettes
+# iguane | iguanette | iguanes|iguanettes
+# cachalot | cachalotte|cachalots|cachalottes
+# panda roux |||
+# perche |||
+# chamois |||
+# bouc |chèvre|boucs|chèvres
+# chouette |||
+# lézard |||
+# poule |||
+# coq |||
+# loup |||
+# oiseau |||
+# mammifère |||
+# couleuvre |||
+# rhinocéros |||
+# poisson mouton |||
+# mouton |||
 @
-Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? | mp
-Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ? | mp
-Ahah, c'est hilarant. Ca me fait penser à un * que j'avais autrefois dans ma maison familiale. Il est mort le pauvre, on a fini par le manger. Tu aimes manger les animaux ?| ms
-Comment vous appelez-vous déjà ? Non je rigole, ça ne m'intéresse pas vraiment. Deux chose m'importent dans le vie, l'ail et votre rapport aux animaux, notamment les * qui sont plutôt mignons... Parlez-moi de ces animaux.|mp
+# Bon, il semblerait que vous ayez de sérieux problèmes avec les *. Peut-être est-ce à cause d'un événement marquant lors de votre enfance ? | mp
+# Très bien, continuez comme ça, vous m'intéressez. D'ailleurs j'aurais une question à vous poser... Qu'est ce que vous préférez, les Hommes ou les * ? | mp
+# Ahah, c'est hilarant. Ca me fait penser à un * que j'avais autrefois dans ma maison familiale. Il est mort le pauvre, on a fini par le manger. Tu aimes manger les animaux ?| ms
+# Comment vous appelez-vous déjà ? Non je rigole, ça ne m'intéresse pas vraiment. Deux chose m'importent dans le vie, l'ail et votre rapport aux animaux, notamment les * qui sont plutôt mignons... Parlez-moi de ces animaux.|mp
 Désolé mais j'ai bientôt une séance de cinéma, je vais voir un film sur les animaux, vous connaissez Zootopie ? Ahah, c'était un piège, je voulais voir votre réaction... vous semblez ne pas apprécier les * ? |mp
-Il me fait penser a mon *, que j'ai essayé a maintes reprises de soumettre et d'étrangler. Il me manque énormément ! Il est mort et enterré à l'heure qu'il est. C'était le * de mes parents. Acheté avec l'héritage ! Un cardio exceptionnel ... pour un * ! | ms
+Il me fait penser a *, que j'ai essayé a maintes reprises de soumettre et d'étrangler. Il me manque énormément ! Il est mort et enterré à l'heure qu'il est. C'était * de mes parents. Acheté avec l'héritage ! Un cardio exceptionnel ... pour * ! |mon,ma ms|le,la ms|un,une ms
 £dépression
 dépression
 abaissement
@@ -103,5 +103,11 @@ torpeur
 tristesse
 vallée
 @
-Est ce que vous ressentez une sorte de * en ce moment ?
-question *|m
+Est ce que vous ressentez une sorte de * en ce moment ?|ms
+question *|ms
+£mort
+mort | morte | morts | mortes
+décédé | décédée | décédés | décédées
+@
+Ce que vous me dites est bien funèbre l'ami hahaha ! Il est vrai que je n'aimerais pas être * !| fs
+Putin mddrrr!
