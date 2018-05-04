@@ -21,10 +21,6 @@ class User:
 		# etat :
 		self.etat = 0
 
-		# anecdotes
-		self.anecdotes = []
-
-
 	def findSomeone(self, nom):
 		for key,valeur in self.relation.items():
 			if nom.upper() in valeur:
@@ -49,6 +45,9 @@ class User:
 			for a in b:
 				if a not in self.gouts[0] and a != '':
 					self.gouts[0].append(a)
+				else:
+					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionLike", a.lower(), "*"))
+					text = input("Moi                 : ")
 
 	# permet d'afficher les informations stockées sur le gout
 	def printGoutsUser(self):
@@ -65,14 +64,19 @@ class User:
 		for a in sport:
 			if a not in self.sport and a != '':
 				self.sport.append(a)
+			else:
+				print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionSport",a.lower(), "*"))
+				text = input("Moi                 : ")
+
 
 	# permet d'afficher les informations sotckées sur le sport
 	def printSportUser(self):
 		print("Sport  : ")
 		for k in self.sport:	
 			print("\t-" + k.lower())
-			
-	def askQuestionToCompleteAnswer(self,question, fileWordToUnderstand, element = None, x = None):
+	
+	# Pose une question pour que une information stockée puisse être stocké dans le user.
+	def askQuestionToCompleteAnswer(sxelf,question, fileWordToUnderstand, element = None, x = None):
 		words = []
 		with open(fileWordToUnderstand, "r") as filepointer:
 			for line in filepointer.readlines():
@@ -112,20 +116,8 @@ class User:
 				key = self.findSomeone(nom)
 				for w in words:
 					if f.findStringInString(key, w):
-						print("Nathanaelle Poilane : " + "Oh, " + nom.lower() + ", "+ w.lower() + " ?")
+						print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionRelation",nom.lower(), "*", w.lower(), "#"))
 						text = input("Moi                 : ")
-
-		# if k != "" or v != "":
-		# 	if v == "":
-		# 		v = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
-		# 	elif k == "":
-		# 		k = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", v, "*")
-		# 	if k != "" and v != "" :
-		# 		if k in self.relation:
-		# 			self.relation[k].append(v)
-		# 		else:
-		# 			self.relation[k] = []
-		# 			self.relation[k].append(v)
 
 	# permet d'afficher les informations sotckées sur la famille
 	def printRelationUser(self):

@@ -287,10 +287,22 @@ def stock_Words_And_Questions(filename):
 				key = line[0]
 				if key == '£':
 					theme = line[1:]
-					dictThemes[theme] = ([], [])				
+					dictThemes[theme] = ([], [])			
 			elif(key == '£'):
 	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
 	return dictThemes
+
+def getRandomPhraseFrom(filename, wordToChange, expressionToChange, wordToChange2 = None, expressionToChange2 = None):
+	phrase = []
+	with open(filename, "r") as filepointer:
+		for line in filepointer:
+			line = line.strip()
+			phrase.append(line)
+	finalPhrase = random.choice(phrase)
+	finalPhrase = finalPhrase.replace(expressionToChange, wordToChange)
+	if expressionToChange2 != None:
+		finalPhrase = finalPhrase.replace(expressionToChange2, wordToChange2)
+	return finalPhrase
