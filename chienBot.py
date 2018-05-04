@@ -22,21 +22,22 @@ def mode2():
 		sleep(uniform(0.5,1.5))
 
 		if themeDetecte == "no":
-
-			reponse = random.choice(smalltalk)
-			while reponse == derniere:
+			jeSuisDetecte, reponse = jeSuis(text)			
+			if jeSuisDetecte == "no":
 				reponse = random.choice(smalltalk)
+				while reponse == derniere:
+					reponse = random.choice(smalltalk)
 
 		else:
 			reponse = reaction(dico, themeDetecte, motDetecte)
 			while reponse == derniere:
+				print("DEBUG : meme message, je reconstruis une nouvelle reaction")
 				reponse = reaction(dico, themeDetecte, motDetecte)
 
 
 		print("Nathanaelle Poilane : " + reponse)
 		derniere = reponse
 
-	return
 
 def mode3():
 	name = input("name pls :\n")
@@ -48,6 +49,8 @@ def mode3():
 		print("Enchanté ", name)
 	text = ""
 	while continuer(text):
+		temps = time()
+		checkAfk()
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
@@ -87,7 +90,7 @@ def testNathan():
 	# 		fichier.close()
 
 def testBrian():
-	mode3()
+	jeSuis("Je suis sale putain de merde.")
 
 if __name__=="__main__":
 	mode = int(sys.argv[1])
