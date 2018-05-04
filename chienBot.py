@@ -4,6 +4,7 @@ from time import sleep
 import os
 import pickle
 import user
+# import ipdb
 
 def stockDataInUser(user):
 	with open('Users/' + user.infos[0], "wb") as u:
@@ -290,31 +291,19 @@ def removePunctuation(line):
 # 		if nbOcc[k] == bestOcc:
 # 			return k, random.choice(wordsInTheme[k]),genre
 
+def remplacer(message, remplacement, mot):
+	# ipdb.set_trace()
 
-
-#Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
-def reaction(dictThemes, theme, mot):
-
-
-	reac = random.choice(dictThemes[theme][1])
-	reac = reac.split('|')
-	message = reac[0].strip()
-	fills = reac[1:]
-
-	# print("DEBUG : reaction choisie : " + message)
-	# print("DEBUG : fills : " + str(fills))
-
-	while '*' in message and 0 < len(fills):
-		if ',' in fills[0]:
-			determinant = fills[0].split(' ')[0].strip()
+	if ',' in remplacement:
+			determinant = remplacement.split(' ')[0].strip()
 			# print("DEBUG   determinant : " + str(determinant))
 			determinant = determinant.split(',')
 
 
 			print("DEBUG    determinant : " + str(determinant))
-			# print(str(fills[0]))
+			# print(str(remplacement))
 
-			fill = fills[0].split(' ')[1].strip()
+			fill = remplacement.split(' ')[1].strip()
 
 			print("DEBUG    fill : " + fill)
 
@@ -339,34 +328,53 @@ def reaction(dictThemes, theme, mot):
 				else:
 					message = message.replace("*", determinant[0] + " " + mot[2].strip(), 1)
 			else:
-				print("#######ERREUR certainement dans le fichier mode2")
+				print("#######ERREUR certainement dans le fichier mode2 ici")
 
 
-		else:
-			if "ms" in fills[0]:
+	else:
+			if "ms" in remplacement:
 				if '¤' not in mot[0]:
 					message = message.replace("*", mot[0].strip(), 1)
 				else:
 					message = message.replace("*", mot[1].strip(), 1)
-			elif "fs" in fills[0]:
+			elif "fs" in remplacement:
 				if '¤' not in mot[1]:
 					message = message.replace("*", mot[1].strip(), 1)
 				else:
 					message = message.replace("*", mot[0].strip(), 1)
-			elif "mp" in fills[0]:
+			elif "mp" in remplacement:
 				if '¤' not in mot[2]:
 					message = message.replace("*", mot[2].strip(), 1)
 				else:
 					message = message.replace("*", mot[3].strip(), 1)
-			elif "fp" in fills[0]:
+			elif "fp" in remplacement:
 				if '¤' not in mot[3]:
 					message = message.replace("*", mot[3].strip(), 1)
 				else:
 					message = message.replace("*", mot[2].strip(), 1)
 			else:
-				print("#######ERREUR certainement dans le fichier mode2")
+				print("#######ERREUR certainement dans le fichier mode2 la")
+	return message
 
 
+
+
+
+
+#Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
+def reaction(dictThemes, theme, mot):
+
+
+	reac = random.choice(dictThemes[theme][1])
+	reac = reac.split('|')
+	message = reac[0].strip()
+	fills = reac[1:]
+
+	# print("DEBUG : reaction choisie : " + message)
+	# print("DEBUG : fills : " + str(fills))
+
+	while '*' in message and 0 < len(fills):
+		message = remplacer(message, fills[0], mot)
 		fills.pop(0)
 
 	#message = message.split("*")
