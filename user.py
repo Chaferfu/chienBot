@@ -5,7 +5,7 @@ import itertools
 class User:
 	
 	def __init__(self, prenom):
-		# infos : prénom, age, adresse
+		# infos : prénom, age, adresse, sexe
 		self.infos = []
 		self.infos.append(prenom)
 
@@ -21,18 +21,20 @@ class User:
 		# etat :
 		self.etat = 0
 
+	# fonction qui trouve une personne avec son nom dans les relations.
 	def findSomeone(self, nom):
 		for key,valeur in self.relation.items():
 			if nom.upper() in valeur:
 				return key
 		return ""
 	
+	# fonction qui trouve un sport stocké dans la mémorie de l'utilisateur
 	def findSport(self, sport):
 		for a in sport:
 			if a.upper() in self.sport:
 				return True;
 
-	# ajoute un gout
+	# ajoute un gout (n'aime pas)
 	def addDislike(self,k,b):
 		if k:
 			for a in b:
@@ -42,7 +44,7 @@ class User:
 					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionDislike", a.lower(), "*"))
 					text = input("Moi                 : ")
 
-	# ajoute un gout
+	# ajoute un gout (aime)
 	def addLike(self,k,b):
 		if k:
 			for a in b:
@@ -62,7 +64,7 @@ class User:
 		for k in self.gouts[1]:	
 			print("\t-" + str(k).lower())	
 
-	# ajoute un sport
+	# ajoute un sport dans l'utilisateur
 	def addSport(self,sport):
 		for a in sport:
 			if a not in self.sport and a != '':
@@ -72,7 +74,7 @@ class User:
 				text = input("Moi                 : ")
 
 
-	# permet d'afficher les informations sotckées sur le sport
+	# permet d'afficher les informations stockées sur le sport
 	def printSportUser(self):
 		print("Sport  : ")
 		for k in self.sport:	
@@ -95,8 +97,9 @@ class User:
 				return w
 		return "inconnu"
 
-	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
-	# si un des deux est nul, il n'y a pas d'ajout.
+	# ajoute une relation en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
+	# si un des deux est nul, il n'y a pas d'ajout. S'il manque l'un des deux, une question
+	# est posée afin de compléter la réponse et pouvoir la stocker.
 	def addRelation(self,k,v):
 		for rel, nom in itertools.zip_longest(k,v):
 			if (nom != None and self.findSomeone(nom) == "") or nom == None:
@@ -122,7 +125,7 @@ class User:
 						print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionRelation",nom.lower(), "*", w.lower(), "#"))
 						text = input("Moi                 : ")
 
-	# permet d'afficher les informations sotckées sur la famille
+	# permet d'afficher les informations stockées sur les relations
 	def printRelationUser(self):
 		print("Relations :")
 		for k in self.relation:
@@ -130,6 +133,7 @@ class User:
 			for name in self.relation[k]:
 				print("\t-" + name.lower())
 
+	# change la valeur d'état de l'utilisateur qui détermine son humeur. Réagit si celle-ci est anormale.
 	def changeMood(self, val):
 		self.etat += val
 		if self.etat <= -5:
@@ -139,7 +143,7 @@ class User:
 			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionGoodMood",self.infos[0], "*"))
 			text = input("Moi                 : ")
 
-
+	# Donne la valeur d'état
 	def getMood(self):
 		if etat >= 0:
 			return "PPR"
