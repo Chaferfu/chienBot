@@ -20,6 +20,8 @@
 L'objectif de ce projet est de développer un chatbot extrêmement sympathique, une sorte de confident, de meilleur ami avec qui on pourrait discuter de tout et de rien, partager nos souvenirs, raconter nos joies, nos peines, rire, pleurer... En un mot, la personne idéale.
 \paragraph{} Ce chatbot, qui parle français et répond au doux nom de Nathanaëlle Poilane, doit être capable d'apprendre à connaître et reconnaitre son interlocuteur. Au fil de la conversation, il retiendra tout ce qui est important : le nom de l'utilisateur, ses amis, sa famille, ses goûts, les activités qu'il aime pratiquer... et ce même si l'on quitte l'application, grâce à un système de sauvegarde.
 
+\vspace{0.5cm}
+
 \section{Calou et Nathanaëlle}
 
 Le programme est organisé en trois modes, chacun plus complexe que le précédent. L'utilisateur peut changer de mode à tout moment, et si le mode actuel n'est pas capable de répondre correctement, il bascule sur le mode inférieur.
@@ -30,12 +32,38 @@ Dans ce mode, Nathanaëlle cède la place à Calou, un adorable chien. Comme tou
 
 \subsection{Mode 2}
 
-Dans ce mode, Nathanaëlle est capable de tenir une conversation basique sur certains sujets : les animaux, la dépression, [...]. Elle est capable d'appliquer certaines règles de la langue française, notamment l'accord masculin/féminin/pluriel.
+Dans ce mode, Nathanaëlle est capable de tenir une conversation basique sur certains sujets : les animaux, la dépression, [...]. Elle est capable d'appliquer certaines règles de la langue française, notamment l'accord masculin/féminin/pluriel. De plus, elle répond aux phrases du style "Je suis X" par "Pourquoi es-tu X ?", et ce à tous les temps de l'indicatif, et même si X est précédé d'un quantifieur (très, trop...) ou d'un comparateur (plus, moins). Par exemple, la réponse à "Je serai très fatigué demain." sera "Pourquoi seras-tu fatigué ?".
 
 \subsection{Mode 3}
 
-Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des informations relatives à l'utlisa
+Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des informations relatives à l'utilisateur. A la rédaction de ce rapport, le chatbot est capable de stocker le nom et le sexe de l'utilisateur, son humeur, les personnes qu'il connait ainsi que le lien qui les unit (soeur, ami...), les sports dont il parle, ce qu'il aime et ce qu'il n'aime pas.
+\paragraph{} Au démarrage, l'utilisateur doit entrer son nom pour que le bot sache à qui il parle. Si le bot a déjà eu une conversation avec cet utilisateur, il va charger tout ce qu'il sait à propos de ce dernier. Pendant l'exécution du programme, les données sont stockées dans une instance de la classe User, puis, lorsque l'utilisateur quitte le programme, une sauvegarde est effectuée dans un fichier.
+\paragraph{} L'utilisateur peut à tout moment consulter les informations que Nathanaelle a retenu en tapant "info".
+
+\subsection{Pistes d'évolution}
+
+Pour l'instant, notre chatbot n'est pas encore capable d'accorder ses réponses en fonction du sexe de l'utilisateur.
+
+\vspace{0.5cm}
 
 \section{Contributions des membres}
+
+\paragraph{Nathan - meakitfed}
+\begin{itemize}
+\item Lecture et sauvegarde des informations de l'utilisateur
+\item Affichage des informations pour le mode 3
+\item ...
+\end{itemize}
+
+\paragraph{Mathias - Chaferfu} 
+\begin{itemize}
+\item ...
+\end{itemize}
+
+\paragraph{Brian - userBrian} 
+\begin{itemize}
+\item Dans le mode 2, réponse aux phrases du type "Je suis X".
+\item Rédaction du rapport
+\end{itemize}
 
 \end{document}
