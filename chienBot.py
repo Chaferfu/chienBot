@@ -76,9 +76,9 @@ def mode3():
 		temps = time()
 		text = input("Moi                 : ")
 		reponse = ""
+		getInformationFromAnswer(text, u)
 		if text == "info":
-			getInformationFromAnswer(text, u)
-
+			u.printInformationUser()
 		if reponse != "":
 			print("Nathanaelle Poilane : " + reponse)
 			stockDataInUser(u)

@@ -253,7 +253,6 @@ def getInformationFromAnswer(answer, u):
 			u.addLike(k,v)
 			k,v = check_Coherence(answer, "FichiersAnalyse/dislike",  "FichiersAnalyse/" + line[0])
 			u.addDislike(k,v)
-	u.printInformationUser()
 
 def jeSuis(line):
 	line = removeQuantifiers(line)
