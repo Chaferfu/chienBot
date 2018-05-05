@@ -138,17 +138,8 @@ class User:
 		self.etat += val
 		if self.etat <= -5:
 			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionBadmood",self.infos[0], "*"))
-			text = input("Moi                 : ")
 		if self.etat >= 5:
 			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionGoodMood",self.infos[0], "*"))
-			text = input("Moi                 : ")
-
-	# Donne la valeur d'état
-	def getMood(self):
-		if etat >= 0:
-			return "PPR"
-		if etat < 0:
-			return "VNR"
 
 	# permet d'afficher l'ensemble des informations stockées
 	def printInformationUser(self):

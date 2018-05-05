@@ -43,7 +43,7 @@ def mode3():
 	smalltalk = read_word_list_file("FichiersAnalyse/mode2_hmmm")
 	dico = stock_Words_And_Questions("FichiersAnalyse/mode2")
 
-	name = input("Entrez votre nom s'il vous plait. :\n")
+	name = input("Entrez votre nom s'il vous plait :\n")
 	u = User(name)
 	if check_Connexion(name, "utilisateurs"):
 		print("Oh content de te revoir", name)
@@ -52,26 +52,29 @@ def mode3():
 		print("Enchanté", name)
 		stockDataInUser(u)
 	text = ""
-	while continuer(text):
+	while True:
 		text = input("Moi                 : ")
 		reponse = ""
-		getInformationFromAnswer(text, u)
-		if text == "info":
-			u.printInformationUser()
-		if reponse != "":
-			print("Nathanaelle Poilane : " + reponse)
-			stockDataInUser(u)
+		if continuer(text):
+			getInformationFromAnswer(text, u)
+			if text == "info":
+				u.printInformationUser()		
+			if reponse != "":
+				print("Nathanaelle Poilane : " + reponse)
+				stockDataInUser(u)
+			else:
+				reponse = checkCava(text, u)
+				if reponse == "":
+					reponse = repliqueMode2(text, dico,smalltalk)
+				print("Nathanaelle Poilane : " + reponse)
 		else:
-			reponse = checkCava(text, u)
-		if reponse != "":
-			reponse = repliqueMode2(text, dico,smalltalk)
-			print("Nathanaelle Poilane : " + reponse)
+			print("Nathanaelle Poilane : A bientôt !")
+			break;
 
 	return
 
 if __name__=="__main__":
 	mode = int(sys.argv[1])
-	print(mode)
 
 	while(mode != 4):
 		while (mode < 0 or mode > 7): 

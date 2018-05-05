@@ -4,6 +4,8 @@
 \usepackage[frenchb.ldf]{babel}
 \usepackage[utf8]{inputenc}
 
+\usepackage{graphicx}
+
 
 % Debut du rapport
 \begin{document}
@@ -36,8 +38,18 @@ Dans ce mode, Nathanaëlle est capable de tenir une conversation basique sur cer
 
 \subsection{Mode 3}
 
-Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des informations relatives à l'utilisateur. A la rédaction de ce rapport, le chatbot est capable de stocker le nom et le sexe de l'utilisateur, son humeur, les personnes qu'il connait ainsi que le lien qui les unit (soeur, ami...), les sports dont il parle, ce qu'il aime et ce qu'il n'aime pas.
+Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des informations relatives à l'utilisateur. A la rédaction de ce rapport, le chatbot est capable de stocker le nom et le sexe de l'utilisateur, son humeur, les personnes qu'il connait ainsi que le lien qui les unit (soeur, ami...), les sports dont il parle, ce qu'il aime et ce qu'il n'aime pas. Lorsque l'utilisateur parle plusieurs fois d'une même chose (une passion, un ami...), Nathanaëlle le remarque et réagit à propos de celà.
+\begin{center}
+\end{center}
+\paragraph{} Nathanaëlle est d'un naturel très empathique. En effet, son humeur dépend énormément de celle de son interlocuteur. Ainsi, elle aura tendance à être de très bonne humeur si vous vous sentez bien, et plus inquiète dans le cas contraire. On peut le remarquer en lui demandant comment elle va.
+\begin{center}
+\includegraphics{empathie.PNG} 
+\end{center}
 \paragraph{} Au démarrage, l'utilisateur doit entrer son nom pour que le bot sache à qui il parle. Si le bot a déjà eu une conversation avec cet utilisateur, il va charger tout ce qu'il sait à propos de ce dernier. Pendant l'exécution du programme, les données sont stockées dans une instance de la classe User, puis, lorsque l'utilisateur quitte le programme, une sauvegarde est effectuée dans un fichier.
+\begin{center}
+\includegraphics{reload.PNG}
+\end{center}
+\paragraph{} 
 \paragraph{} L'utilisateur peut à tout moment consulter les informations que Nathanaelle a retenu en tapant "info".
 
 \subsection{Pistes d'évolution}
@@ -52,9 +64,9 @@ Pour l'instant, notre chatbot n'est pas encore capable d'accorder ses réponses 
 
 \paragraph{Nathan - meakitfed}
 \begin{itemize}
-\item Une grande partie du fichier User, implémenté le stockage des informations sur les utilisateurs mais aussi la création de réactions vis-à-vis d'informations déjà stockées.
+\item Une grande partie du fichier User, implémenté le stockage des informations sur les utilisateurs mais aussi la création de réactions vis-à-vis d'informations déjà stockées ;
 \item Création des utilisateurs et du lien avec la classe user afin d’enregistrer/récupérer les informations (avec Brian).
-création de la fonction check cohérence qui est très utilisé dans le mode 3 pour comprendre l’information donnée par l’utilisateur pour éventuellement la stocker.
+création de la fonction check cohérence qui est très utilisé dans le mode 3 pour comprendre l’information donnée par l’utilisateur pour éventuellement la stocker ;
 \item Création de la fonction qui parse le fichier mode 2 afin de comprendre des thèmes abordé lors d’une discussion (avec Mathias).
 \item Affichage des informations pour le mode 3 ;
 \end{itemize}
@@ -69,6 +81,7 @@ création de la fonction check cohérence qui est très utilisé dans le mode 3 
 \item Dans le mode 2, réponse aux phrases du type "Je suis X" ;
 \item Dans le mode 3, gestion de l'humeur de l'utilisateur ;
 \item Arrêt du mode lorsque l'utilisateur dit "Au revoir" ou un équivalent ;
+\item Réponse de Nathanaëlle lorsqu'on lui demande comment elle va ;
 \item Diverses fonctions de traitement de phrase
 \item main
 \item Rédaction du rapport

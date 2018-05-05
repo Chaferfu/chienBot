@@ -1,6 +1,6 @@
 from random import randint, uniform
 import random 
-from time import sleep, time
+from time import sleep
 import os
 import pickle
 import user
@@ -146,7 +146,7 @@ def calou():
 	return
 
 def checkCava(answer, user):
-	if answer.find("Comment ça va ?") or answer.find("Comment vas-tu ?"):
+	if answer.find("Comment ça va ?") != -1 or answer.find("Comment vas-tu ?") != -1:
 		if user.etat > 5:
 			return "Je me sens merveilleusement bien."
 		if user.etat < -5:
@@ -274,7 +274,6 @@ def getInformationFromAnswer(answer, u):
 # et de l'éventuelle utilisation de quantifieurs ou de comparateurs.
 def jeSuis(line):
 	line = removeQuantifiers(line)
-	print(line)
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
 	if index  != -1:
 		reponse = "Pourquoi es-tu "
