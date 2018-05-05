@@ -33,7 +33,6 @@ def mode2():
 	smalltalk = read_word_list_file("FichiersAnalyse/mode2_hmmm")
 	dico = stock_Words_And_Questions("FichiersAnalyse/mode2")
 	derniere = ""
-
 	text = ""
 	while continuer(text):
 
@@ -65,24 +64,24 @@ def mode3():
 	smalltalk = read_word_list_file("FichiersAnalyse/mode2_hmmm")
 	dico = stock_Words_And_Questions("FichiersAnalyse/mode2")
 
-	name = input("name pls :\n")
+	name = input("Entrez votre nom s'il vous plait. :\n")
 	u = User(name)
 	if check_Connexion(name, "utilisateurs"):
-		print("Oh content de te revoir ", name)
+		print("Oh content de te revoir", name)
 		u = readDataFromUser(u)
 	else:
-		print("Enchanté ", name)
+		print("Enchanté", name)
 	text = ""
 	while continuer(text):
 		temps = time()
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
-
+		if text == "info":
+			u.printInformationUser()
 		if reponse != "":
 			print("Nathanaelle Poilane : " + reponse)
 			stockDataInUser(u)
-
 		else:
 			reponse = repliqueMode2(text, dico,smalltalk)
 			print("Nathanaelle Poilane : " + reponse)

@@ -5,6 +5,7 @@ import os
 import pickle
 import user
 
+#Renvoie une réplique en utilisant l'algorithme du mode 2
 def repliqueMode2(text,dico,smalltalk):
 
 	themeDetecte, motDetecte = analyzeSentence(text, dico)
@@ -17,21 +18,15 @@ def repliqueMode2(text,dico,smalltalk):
 		reponse = reaction(dico, themeDetecte, motDetecte)
 	return reponse
 
+# Remplace les symboles '*' dans le message selectionne en utilisant le mot choisi
+# et en acordant correctement les mots et les determinants les précédant 
 def remplacer(message, remplacement, mot):
-	# ipdb.set_trace()
-
 	if ',' in remplacement:
 			determinant = remplacement.split(' ')[0].strip()
 			# print("DEBUG   determinant : " + str(determinant))
 			determinant = determinant.split(',')
 
-
-			print("DEBUG    determinant : " + str(determinant))
-			# print(str(remplacement))
-
 			fill = remplacement.split(' ')[1].strip()
-
-			print("DEBUG    fill : " + fill)
 
 			if "ms" in fill:
 				if '¤' not in mot[0]:
@@ -90,19 +85,10 @@ def analyzeSentence(line, dico):
 
 	
 	line = removePunctuation(line)
-	#words = line.split(' ')
-	# print(words)
-	
-		# print(word)
-		#print("HEEEY")
-		#print(findTheme(word, dico))
 	nbOcc, wordsInTheme = findThemes(line, dico)
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
 	for k, v in nbOcc.items():
-		# print("#################")
-		# print(bestOcc)
-		# print(k, v)
 		if 0<v :
 			nothingfound = False
 
@@ -113,11 +99,12 @@ def analyzeSentence(line, dico):
 		if nbOcc[k] == bestOcc:
 			return k, random.choice(wordsInTheme[k])
 
-
 	#should be dead code from here
 	print("ca bug :(")
 	
-# Waf
+# Bot utilisé dans le mode 1
+# Calou dit des phrases construites aléatoirement à base d'aboiements
+# propose aussi d'autres fonctionnalites listees dans le rapport
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("FichiersAnalyse/mode0")
@@ -158,6 +145,8 @@ def calou():
 		derniere = reponse
 	return
 
+# cherche dans un ou deux fichiers s'il y a une cohérence dans la réponse de l'utilisateur
+# en comparant avec les mostd es fichiers, renvoi deux listes de mots. 
 def check_Coherence(answer,keyFileName, valueFileName = ""):
 	tmp = ([], [])
 	keys = read_word_list_file(keyFileName)
@@ -174,7 +163,7 @@ def check_Coherence(answer,keyFileName, valueFileName = ""):
 					tmp[1].append(v)
 	return tmp
 
-# Au début du mode 3, cherche si l'utilisateur est déjà connu
+# Au début du mode 3, cherche si l'utilisateur est déjà connu.
 def check_Connexion(name, filename):
 	with open(filename, "r") as filepointer:
 		for line in filepointer.readlines():
@@ -220,26 +209,14 @@ def findThemes(line, dico):
 	for key in dico.keys():
 		wordsInTheme[key] = []
 		nbOcc[key] = 0
-		# print(key)
-
-	#print("line is : " + line)
 
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				#print(" is " + variante + " in line ? : ")
-				#if variante != '' and variante.strip() in line.lower(): #cette ligne marchait avant ais nathan est iperialiste il veut quo tilise sa fonction partout
-				# if variante.strip() == "chien":
-				# 	print("is chien in " + line + "? : " + str(findStringInString(variante.strip(),line)))
-				if findStringInString(variante, line):
-					#print("yes")
-					# print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
-					
+				if findStringInString(variante, line):				
 					hypothese = variante.strip().split(' ')
 					tokens = line.lower().strip().split(' ')
-
 					for tok in tokens:
-						#print ("tok : " + tok + " \t hypo : " + hypothese[0])
 						if tok == hypothese[0]:
 							nbOcc[theme] += 1
 							wordsInTheme[theme].append(w)
@@ -282,7 +259,6 @@ def getInformationFromAnswer(answer, u):
 			u.addLike(k,v)
 			k,v = check_Coherence(answer, "FichiersAnalyse/dislike",  "FichiersAnalyse/" + line[0])
 			u.addDislike(k,v)
-	u.printInformationUser()
 
 def jeSuis(line):
 	line = removeQuantifiers(line)
@@ -323,24 +299,9 @@ def reaction(dictThemes, theme, mot):
 	reac = reac.split('|')
 	message = reac[0].strip()
 	fills = reac[1:]
-
-	# print("DEBUG : reaction choisie : " + message)
-	# print("DEBUG : fills : " + str(fills))
-
 	while '*' in message and 0 < len(fills):
 		message = remplacer(message, fills[0], mot)
 		fills.pop(0)
-
-	#message = message.split("*")
-
-	#print(message)
-	#message = message[0] + fill + message[1]
-	# for i in range(0,len(message)-1):
-	# 	reponse = reponse + message[i]
-	# 	reponse = reponse + fill.strip()
-		#print("iteratio :" + str(i) + "reponse = " + reponse)
-
-	#reponse = reponse + message[-1]
 	return message
 
 # Lorsqu'un utilisateur se reconnecte, charge les donnees enregistrees lors
@@ -375,14 +336,6 @@ def removeQuantifiers(line):
 	words = read_word_list_file("FichiersAnalyse/quantifieurs")
 	for w in words:
 		line = line.replace(str(w), "")
-	"""with open("quantifieurs", "r") as filepointer:
-		for word in filepointer.readlines():
-			if line.find(word) != -1:
-				print("found")
-			else:
-				print(":(")
-			line = line.replace(str(word), "")
-"""
 	return line
 
 # Renvoie une reponse plutot nulle et non constructive
@@ -427,6 +380,8 @@ def stock_Words_And_Questions(filename):
 				dictThemes[theme][1].append(line)
 	return dictThemes
 
+# renvoi une phrase aléatoire du fichier filename en remplacant des éléments de la phrase par d'autres expressions
+# pour personnaliser la réponse.
 def getRandomPhraseFrom(filename, wordToChange, expressionToChange, wordToChange2 = None, expressionToChange2 = None):
 	phrase = []
 	with open(filename, "r") as filepointer:
