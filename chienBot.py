@@ -149,7 +149,6 @@ def mode3():
 	text = ""
 	while continuer(text):
 		temps = time()
-		checkAfk()
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
