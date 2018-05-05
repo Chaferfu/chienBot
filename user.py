@@ -38,6 +38,9 @@ class User:
 			for a in b:
 				if a not in self.gouts[1] and a != '':
 					self.gouts[1].append(a)
+				else:
+					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionDislike", a.lower(), "*"))
+					text = input("Moi                 : ")
 
 	# ajoute un gout
 	def addLike(self,k,b):
@@ -90,7 +93,7 @@ class User:
 		for w in words:
 			if f.findStringInString(w, text):
 				return w
-		return "Inconnu"
+		return "inconnu"
 
 	# ajoute un membre de la famille en fonction d'une clé k (ex:Tante) et d'une valeur v (ex:George).
 	# si un des deux est nul, il n'y a pas d'ajout.
@@ -129,6 +132,13 @@ class User:
 
 	def changeMood(self, val):
 		self.etat += val
+		if self.etat <= -5:
+			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionBadmood",self.infos[0], "*"))
+			text = input("Moi                 : ")
+		if self.etat >= 5:
+			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionGoodMood",self.infos[0], "*"))
+			text = input("Moi                 : ")
+
 
 	def getMood(self):
 		if etat >= 0:

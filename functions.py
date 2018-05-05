@@ -120,21 +120,20 @@ def check_Connexion(name, filename):
 # Récupère des informations relatives à l'humeur de l'utilisateur en fonction de ses réponses
 def checkMood(answer, user):
 	k, v = check_Coherence(answer, "Mood/joie")
-	if (k, v) != ('', ''):
-		user.etat += 3
+	if k:
+		user.changeMood(3)
 	k, v = check_Coherence(answer, "Mood/tranquillite")
-	if (k, v) != ('', ''):
-		user.etat += 1
+	if k:
+		user.changeMood(1)
 	k, v = check_Coherence(answer, "Mood/tristesse")
-	if (k, v) != ('', ''):
-		user.etat -= 2
+	if k:
+		user.changeMood(-2)
 	k, v = check_Coherence(answer, "Mood/colere")
-	if (k, v) != ('', ''):
-		user.etat -= 3
+	if k:
+		user.changeMood(-3)
 	k, v = check_Coherence(answer, "Mood/degout")
-	if (k, v) != ('', ''):
-		user.etat -= 1
-	print(user.etat)
+	if k:
+		user.changeMood(-1)
 
 # Permet de quitter le mode actuel si l'utilisateur dit "Au revoir !"
 def continuer(text):
