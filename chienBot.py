@@ -2,6 +2,16 @@
 from functions import *
 from user import *
 import sys
+<<<<<<< HEAD
+=======
+from random import randint, uniform
+import random 
+from time import sleep
+import os
+import pickle
+import user
+# import ipdb
+>>>>>>> dcd171b23e893f7c81440ce8d689e23fffd7356c
 
 def mode1():
 	calou()

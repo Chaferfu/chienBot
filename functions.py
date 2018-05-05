@@ -4,6 +4,7 @@ from time import sleep
 import os
 import pickle
 import user
+# import ipdb
 
 #Renvoie une réplique en utilisant l'algorithme du mode 2
 def repliqueMode2(text,dico,smalltalk):
@@ -80,6 +81,7 @@ def remplacer(message, remplacement, mot):
 # Cherche si une entrée de l'utilisateur se refère à un thème connu
 def analyzeSentence(line, dico):
 	
+
 	theme = ""
 	nothingfound = True
 
@@ -223,7 +225,10 @@ def findThemes(line, dico):
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				if findStringInString(variante, line):				
+
+				# ipdb.set_trace()
+
+				if findStringInString(variante.strip(), line):				
 					hypothese = variante.strip().split(' ')
 					tokens = line.lower().strip().split(' ')
 					for tok in tokens:
