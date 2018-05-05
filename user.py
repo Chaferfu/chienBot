@@ -39,7 +39,7 @@ class User:
 				if a not in self.gouts[1] and a != '':
 					self.gouts[1].append(a)
 				else:
-					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionDislike", a.lower(), "*"))
+					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionDislike", a.lower(), "*"))
 					text = input("Moi                 : ")
 
 	# ajoute un gout
@@ -49,7 +49,7 @@ class User:
 				if a not in self.gouts[0] and a != '':
 					self.gouts[0].append(a)
 				else:
-					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionLike", a.lower(), "*"))
+					print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionLike", a.lower(), "*"))
 					text = input("Moi                 : ")
 
 	# permet d'afficher les informations stockées sur le gout
@@ -68,7 +68,7 @@ class User:
 			if a not in self.sport and a != '':
 				self.sport.append(a)
 			else:
-				print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionSport",a.lower(), "*"))
+				print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionSport",a.lower(), "*"))
 				text = input("Moi                 : ")
 
 
@@ -101,9 +101,9 @@ class User:
 		for rel, nom in itertools.zip_longest(k,v):
 			if (nom != None and self.findSomeone(nom) == "") or nom == None:
 				if nom == None:
-					nom = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","valuesNames")
+					nom = self.askQuestionToCompleteAnswer("Oh vraiment, c'est quoi son nom ?","FichiersAnalyse/valuesNames")
 				elif rel == None:
-					rel = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","keyRelation", nom, "*")
+					rel = self.askQuestionToCompleteAnswer("Ah, c'est qui * ?","FichiersAnalyse/keyRelation", nom, "*")
 				if nom != None and rel != None:
 					if rel not in self.relation:
 						self.relation[rel] = []
@@ -111,7 +111,7 @@ class User:
 						self.relation[rel].append(nom)
 			elif nom != None and rel == None:
 				words = []
-				with open("relationAnswer", "r") as filepointer:
+				with open("FichiersAnalyse/relationAnswer", "r") as filepointer:
 					for line in filepointer.readlines():
 						line = line.strip()
 						words.append(line)
@@ -119,7 +119,7 @@ class User:
 				key = self.findSomeone(nom)
 				for w in words:
 					if f.findStringInString(key, w):
-						print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionRelation",nom.lower(), "*", w.lower(), "#"))
+						print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionRelation",nom.lower(), "*", w.lower(), "#"))
 						text = input("Moi                 : ")
 
 	# permet d'afficher les informations sotckées sur la famille
@@ -133,10 +133,10 @@ class User:
 	def changeMood(self, val):
 		self.etat += val
 		if self.etat <= -5:
-			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionBadmood",self.infos[0], "*"))
+			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionBadmood",self.infos[0], "*"))
 			text = input("Moi                 : ")
 		if self.etat >= 5:
-			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("questionGoodMood",self.infos[0], "*"))
+			print("Nathanaelle Poilane : " + f.getRandomPhraseFrom("FichiersAnalyse/questionGoodMood",self.infos[0], "*"))
 			text = input("Moi                 : ")
 
 

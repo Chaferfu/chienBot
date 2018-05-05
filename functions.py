@@ -5,30 +5,98 @@ import os
 import pickle
 import user
 
+def repliqueMode2(text,dico,smalltalk):
+
+	themeDetecte, motDetecte = analyzeSentence(text, dico)
+	if themeDetecte == "no":
+		jeSuisDetecte, reponse = jeSuis(text)			
+		if jeSuisDetecte == "no":
+			reponse = random.choice(smalltalk)
+
+	else:
+		reponse = reaction(dico, themeDetecte, motDetecte)
+	return reponse
+
+def remplacer(message, remplacement, mot):
+	# ipdb.set_trace()
+
+	if ',' in remplacement:
+			determinant = remplacement.split(' ')[0].strip()
+			# print("DEBUG   determinant : " + str(determinant))
+			determinant = determinant.split(',')
+
+
+			print("DEBUG    determinant : " + str(determinant))
+			# print(str(remplacement))
+
+			fill = remplacement.split(' ')[1].strip()
+
+			print("DEBUG    fill : " + fill)
+
+			if "ms" in fill:
+				if '¤' not in mot[0]:
+					message = message.replace("*", determinant[0] + " " + mot[0].strip(), 1)
+				else:
+					message = message.replace("*", determinant[1] + " " + mot[1].strip(), 1)
+			elif "fs" in fill:
+				if '¤' not in mot[1]:
+					message = message.replace("*", determinant[1] + " " + mot[1].strip(), 1)
+				else:
+					message = message.replace("*", determinant[0] + " " + mot[0].strip(), 1)
+			elif "mp" in fill:
+				if '¤' not in mot[2]:
+					message = message.replace("*", determinant[0] + " " + mot[2].strip(), 1)
+				else:
+					message = message.replace("*", determinant[1] + " " + mot[3].strip(), 1)
+			elif "fp" in fill:
+				if '¤' not in mot[3]:
+					message = message.replace("*", determinant[1] + " " + mot[3].strip(), 1)
+				else:
+					message = message.replace("*", determinant[0] + " " + mot[2].strip(), 1)
+			else:
+				print("#######ERREUR certainement dans le fichier mode2 ici")
+
+
+	else:
+			if "ms" in remplacement:
+				if '¤' not in mot[0]:
+					message = message.replace("*", mot[0].strip(), 1)
+				else:
+					message = message.replace("*", mot[1].strip(), 1)
+			elif "fs" in remplacement:
+				if '¤' not in mot[1]:
+					message = message.replace("*", mot[1].strip(), 1)
+				else:
+					message = message.replace("*", mot[0].strip(), 1)
+			elif "mp" in remplacement:
+				if '¤' not in mot[2]:
+					message = message.replace("*", mot[2].strip(), 1)
+				else:
+					message = message.replace("*", mot[3].strip(), 1)
+			elif "fp" in remplacement:
+				if '¤' not in mot[3]:
+					message = message.replace("*", mot[3].strip(), 1)
+				else:
+					message = message.replace("*", mot[2].strip(), 1)
+			else:
+				print("#######ERREUR certainement dans le fichier mode2 la")
+	return message
+
 # Cherche si une entrée de l'utilisateur se refère à un thème connu
 def analyzeSentence(line, dico):
-	nbOcc = {}
-	wordsInTheme = {}
+	
 	theme = ""
 	nothingfound = True
 
-	for key in dico.keys():
-		wordsInTheme[key] = []
-		nbOcc[key] = 0
-		# print(key)
+	
 	line = removePunctuation(line)
-	words = line.split(' ')
+	#words = line.split(' ')
 	# print(words)
-	for word in words:
+	
 		# print(word)
 		#print("HEEEY")
 		#print(findTheme(word, dico))
-		theme, wordArray = findTheme(word, dico)
-		if(theme != "mot absent"):
-			# print("Theme trouv : " + theme)
-			nbOcc[theme] += 1
-			wordsInTheme[theme].append(wordArray)
-
+	nbOcc, wordsInTheme = findThemes(line, dico)
 
 	bestOcc = max([ nbOcc[k] for k in nbOcc])
 	for k, v in nbOcc.items():
@@ -48,12 +116,12 @@ def analyzeSentence(line, dico):
 
 	#should be dead code from here
 	print("ca bug :(")
-
+	
 # Waf
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
-	repliques = read_word_list_file("mode0")
-	repliquesRares = read_word_list_file("mode1")
+	repliques = read_word_list_file("FichiersAnalyse/mode0")
+	repliquesRares = read_word_list_file("FichiersAnalyse/mode1")
 	derniere = ""
 	triggered = False
 
@@ -144,16 +212,40 @@ def continuer(text):
 # Cherche si un mot rentre par l'utilisateur figure dans le dictionnaire et 
 # retourne le thème associé, ou "mot absent" si le mot n'est pas dans le 
 # dictionnaire
-def findTheme(word, dico):
+def findThemes(line, dico):
+
+	nbOcc = {}
+	wordsInTheme = {}
+
+	for key in dico.keys():
+		wordsInTheme[key] = []
+		nbOcc[key] = 0
+		# print(key)
+
+	#print("line is : " + line)
+
 	for theme, valeur in dico.items():
 		for w in valeur[0]:
 			for variante in w:
-				if variante != '' and (variante == word.replace(' ', '').lower()):
+				#print(" is " + variante + " in line ? : ")
+				#if variante != '' and variante.strip() in line.lower(): #cette ligne marchait avant ais nathan est iperialiste il veut quo tilise sa fonction partout
+				# if variante.strip() == "chien":
+				# 	print("is chien in " + line + "? : " + str(findStringInString(variante.strip(),line)))
+				if findStringInString(variante, line):
+					#print("yes")
 					# print("Le mot " + variante +" de la famille " + str(w) +" appartient au thème " + theme)
+					
+					hypothese = variante.strip().split(' ')
+					tokens = line.lower().strip().split(' ')
 
-					return theme, w
-
-	return "mot absent", []
+					for tok in tokens:
+						#print ("tok : " + tok + " \t hypo : " + hypothese[0])
+						if tok == hypothese[0]:
+							nbOcc[theme] += 1
+							wordsInTheme[theme].append(w)
+						
+					
+	return nbOcc, wordsInTheme
 
 # Renvoie True si la chaine word est dans la chaine phrase
 def findStringInString(word, phrase):
@@ -178,17 +270,17 @@ def functionWriteFileUpper(filename):
 # Fonction principale du mode 3 : analyse la réponse de l'utilisateur et
 # recupere le plus d'informations possible
 def getInformationFromAnswer(answer, u):
-	k,v = check_Coherence(answer, "keyRelation","valuesNames")
+	k,v = check_Coherence(answer, "FichiersAnalyse/keyRelation","FichiersAnalyse/valuesNames")
 	u.addRelation(k,v)
-	k,v = check_Coherence(answer, "keySports")
+	k,v = check_Coherence(answer, "FichiersAnalyse/keySports")
 	u.addSport(k)
 	checkMood(answer, u)
-	with open("fichiersGouts", "r") as filepointer:
+	with open("FichiersAnalyse/fichiersGouts", "r") as filepointer:
 		for line in filepointer.readlines():
 			line = line.split()
-			k,v = check_Coherence(answer, "like", line[0])
+			k,v = check_Coherence(answer, "FichiersAnalyse/like", "FichiersAnalyse/" + line[0])
 			u.addLike(k,v)
-			k,v = check_Coherence(answer, "dislike", line[0])
+			k,v = check_Coherence(answer, "FichiersAnalyse/dislike",  "FichiersAnalyse/" + line[0])
 			u.addDislike(k,v)
 	u.printInformationUser()
 
@@ -222,36 +314,34 @@ def jeSuis(line):
 	return "no", ""
 
 
-# Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
+
+#Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
+
 
 	reac = random.choice(dictThemes[theme][1])
 	reac = reac.split('|')
 	message = reac[0].strip()
-	genre = reac[1].strip()
-	reponse = ""
-	if genre == 'ms':
-		fill = mot[0]
-	elif genre == 'fs':
-		fill = mot[1]
-	elif genre == 'mp':
-		fill = mot[2]
-	elif genre == 'fp':
-		fill = mot[3]
-	else:
-		print("oula ca bug erreur genre reponse\n")
-	message = message.split("*")
+	fills = reac[1:]
+
+	# print("DEBUG : reaction choisie : " + message)
+	# print("DEBUG : fills : " + str(fills))
+
+	while '*' in message and 0 < len(fills):
+		message = remplacer(message, fills[0], mot)
+		fills.pop(0)
+
+	#message = message.split("*")
 
 	#print(message)
-	#	message = message[0] + fill + message[1]
-	for i in range(0,len(message)-1):
-		reponse = reponse + message[i]
-		reponse = reponse + fill
+	#message = message[0] + fill + message[1]
+	# for i in range(0,len(message)-1):
+	# 	reponse = reponse + message[i]
+	# 	reponse = reponse + fill.strip()
 		#print("iteratio :" + str(i) + "reponse = " + reponse)
 
-	reponse = reponse + message[-1]
-
-	return reponse
+	#reponse = reponse + message[-1]
+	return message
 
 # Lorsqu'un utilisateur se reconnecte, charge les donnees enregistrees lors
 # de la derniere session
@@ -282,9 +372,8 @@ def removePunctuation(line):
 	return line
 
 def removeQuantifiers(line):
-	words = read_word_list_file("quantifieurs")
+	words = read_word_list_file("FichiersAnalyse/quantifieurs")
 	for w in words:
-		print(w)
 		line = line.replace(str(w), "")
 	"""with open("quantifieurs", "r") as filepointer:
 		for word in filepointer.readlines():
@@ -333,7 +422,6 @@ def stock_Words_And_Questions(filename):
 					theme = line[1:]
 					dictThemes[theme] = ([], [])			
 			elif(key == '£'):
-	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
