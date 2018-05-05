@@ -5,6 +5,7 @@ import os
 import pickle
 import user
 
+#Renvoie une réplique en utilisant l'algorithme du mode 2
 def repliqueMode2(text,dico,smalltalk):
 
 	themeDetecte, motDetecte = analyzeSentence(text, dico)
@@ -17,6 +18,8 @@ def repliqueMode2(text,dico,smalltalk):
 		reponse = reaction(dico, themeDetecte, motDetecte)
 	return reponse
 
+# Remplace les symboles '*' dans le message selectionne en utilisant le mot choisi
+# et en acordant correctement les mots et les determinants les précédant 
 def remplacer(message, remplacement, mot):
 	if ',' in remplacement:
 			determinant = remplacement.split(' ')[0].strip()
@@ -99,6 +102,9 @@ def analyzeSentence(line, dico):
 	#should be dead code from here
 	print("ca bug :(")
 	
+# Bot utilisé dans le mode 1
+# Calou dit des phrases construites aléatoirement à base d'aboiements
+# propose aussi d'autres fonctionnalites listees dans le rapport
 def calou():
 	motsCles = ["gamelle",'promener','promenade','chat','miaou']
 	repliques = read_word_list_file("FichiersAnalyse/mode0")
