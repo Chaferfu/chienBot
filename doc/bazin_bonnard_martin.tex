@@ -43,6 +43,8 @@ Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des inf
 \subsection{Pistes d'évolution}
 
 Pour l'instant, notre chatbot n'est pas encore capable d'accorder ses réponses en fonction du sexe de l'utilisateur.
+\paragraph{} Le chatbot est limité par son nombre de réponses possible. En effet, chacune des réponses qu’il formule est présente dans un fichier texte, cela le rend très rapidement inintéressant si l’utilisateur lui parle longtemps : il risque de faire le tour des discussions possibles. 
+\paragraph{} Il stocke aussi des informations très particulières sur l’utilisateur, si celui-ci indique qu’il aime les chewing-gum, rien ne va être retenu si le mot chewing-gum n’est pas des un des fichiers concerné par les goûts. Pour l’instant, on peut aimer des personnes/relations, des animaux, des capitales, des fruits, des pokémons...
 
 \vspace{0.5cm}
 
@@ -50,9 +52,11 @@ Pour l'instant, notre chatbot n'est pas encore capable d'accorder ses réponses 
 
 \paragraph{Nathan - meakitfed}
 \begin{itemize}
-\item Lecture et sauvegarde des informations de l'utilisateur
-\item Affichage des informations pour le mode 3
-\item ...
+\item Une grande partie du fichier User, implémenté le stockage des informations sur les utilisateurs mais aussi la création de réactions vis-à-vis d'informations déjà stockées.
+\item Création des utilisateurs et du lien avec la classe user afin d’enregistrer/récupérer les informations (avec Brian).
+création de la fonction check cohérence qui est très utilisé dans le mode 3 pour comprendre l’information donnée par l’utilisateur pour éventuellement la stocker.
+\item Création de la fonction qui parse le fichier mode 2 afin de comprendre des thèmes abordé lors d’une discussion (avec Mathias).
+\item Affichage des informations pour le mode 3 ;
 \end{itemize}
 
 \paragraph{Mathias - Chaferfu} 
@@ -62,7 +66,11 @@ Pour l'instant, notre chatbot n'est pas encore capable d'accorder ses réponses 
 
 \paragraph{Brian - userBrian} 
 \begin{itemize}
-\item Dans le mode 2, réponse aux phrases du type "Je suis X".
+\item Dans le mode 2, réponse aux phrases du type "Je suis X" ;
+\item Dans le mode 3, gestion de l'humeur de l'utilisateur ;
+\item Arrêt du mode lorsque l'utilisateur dit "Au revoir" ou un équivalent ;
+\item Diverses fonctions de traitement de phrase
+\item main
 \item Rédaction du rapport
 \end{itemize}
 

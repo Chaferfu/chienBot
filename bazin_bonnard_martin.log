@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.5.1)  5 MAY 2018 16:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.5.1)  5 MAY 2018 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -468,10 +468,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 (./bazin_bonnard_martin.aux) ) 
 Here is how much of TeX's memory you used:
- 2134 strings out of 494924
- 28145 string characters out of 6179709
+ 2136 strings out of 494924
+ 28168 string characters out of 6179709
  93552 words of memory out of 5000000
- 5450 multiletter control sequences out of 15000+600000
+ 5452 multiletter control sequences out of 15000+600000
  7895 words of font info for 28 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  28i,6n,32p,614b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -480,7 +480,7 @@ Here is how much of TeX's memory you used:
 nts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on bazin_bonnard_martin.pdf (2 pages, 70294 bytes).
+Output written on bazin_bonnard_martin.pdf (2 pages, 72978 bytes).
 PDF statistics:
  31 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream

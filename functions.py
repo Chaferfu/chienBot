@@ -145,6 +145,16 @@ def calou():
 		derniere = reponse
 	return
 
+def checkCava(answer, user):
+	if answer.find("Comment ça va ?") or answer.find("Comment vas-tu ?"):
+		if user.etat > 5:
+			return "Je me sens merveilleusement bien."
+		if user.etat < -5:
+			return "Je suis assez préoccupé, je n'aime pas quand tu ne vas pas bien."
+		else:
+			return "Ca va, ça va."
+	return ""
+
 # cherche dans un ou deux fichiers s'il y a une cohérence dans la réponse de l'utilisateur
 # en comparant avec les mostd es fichiers, renvoi deux listes de mots. 
 def check_Coherence(answer,keyFileName, valueFileName = ""):
@@ -260,36 +270,72 @@ def getInformationFromAnswer(answer, u):
 			k,v = check_Coherence(answer, "FichiersAnalyse/dislike",  "FichiersAnalyse/" + line[0])
 			u.addDislike(k,v)
 
+# Répond à une phrase du type "Je suis ..." en tenant compte du temps utilisé, 
+# et de l'éventuelle utilisation de quantifieurs ou de comparateurs.
 def jeSuis(line):
 	line = removeQuantifiers(line)
 	print(line)
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
 	if index  != -1:
-		reponse = "Pourquoi es-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi es-tu "
+		if line[index+8:index+12] == "plus":
+			reponse += "plus " + line[index+12:len(line)].split()[0] + " ?"
+		elif line[index+8:index+13] == "moins":
+			reponse += "moins " + line[index+13:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+8:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je serai ")
 	if index != -1:
-		reponse = "Pourquoi seras-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi seras-tu "
+		if line[index+9:index+13] == "plus":
+			reponse += "plus " + line[index+13:len(line)].split()[0] + " ?"
+		elif line[index+9:index+14] == "moins":
+			reponse += "moins " + line[index+14:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+9:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'étais ")
 	if index != -1:
-		reponse = "Pourquoi étais-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi étais-tu "
+		if line[index+8:index+12] == "plus":
+			reponse += "plus " + line[index+12:len(line)].split()[0] + " ?"
+		elif line[index+8:index+13] == "moins":
+			reponse += "moins " + line[index+13:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+8:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je fus ")
 	if index != -1:
-		reponse = "Pourquoi fus-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi fus-tu "
+		if line[index+7:index+11] == "plus":
+			reponse += "plus " + line[index+11:len(line)].split()[0] + " ?"
+		elif line[index+7:index+12] == "moins":
+			reponse += "moins " + line[index+12:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+7:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'ai été ")
 	if index != -1:
-		reponse = "Pourquoi as-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi as-tu été "
+		if line[index+9:index+13] == "plus":
+			reponse += "plus " + line[index+13:len(line)].split()[0] + " ?"
+		elif line[index+9:index+14] == "moins":
+			reponse += "moins " + line[index+14:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+9:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'avais été' ")
 	if index != -1:
-		reponse = "Pourquoi avais-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi avais-tu été "
+		if line[index+11:index+15] == "plus":
+			reponse += "plus " + line[index+15:len(line)].split()[0] + " ?"
+		elif line[index+11:index+16] == "moins":
+			reponse += "moins " + line[index+16:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+11:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	return "no", ""
-
-
 
 #Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
@@ -332,6 +378,7 @@ def removePunctuation(line):
 
 	return line
 
+# Retire les quantifieurs d'une phrase
 def removeQuantifiers(line):
 	words = read_word_list_file("FichiersAnalyse/quantifieurs")
 	for w in words:

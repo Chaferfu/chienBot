@@ -2,31 +2,10 @@
 from functions import *
 from user import *
 import sys
-from random import randint, uniform
-import random 
-from time import sleep
-import os
-import pickle
-import user
 
 def mode1():
 	calou()
 	return
-
-def repliqueMode2(text,dico,smalltalk):
-
-	themeDetecte, motDetecte = analyzeSentence(text, dico)
-	if themeDetecte == "no":
-		jeSuisDetecte, reponse = jeSuis(text)			
-		if jeSuisDetecte == "no":
-			reponse = random.choice(smalltalk)
-
-	else:
-		reponse = reaction(dico, themeDetecte, motDetecte)
-
-	return reponse
-
-
 
 def mode2():
 
@@ -71,9 +50,9 @@ def mode3():
 		u = readDataFromUser(u)
 	else:
 		print("Enchanté", name)
+		stockDataInUser(u)
 	text = ""
 	while continuer(text):
-		temps = time()
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
@@ -83,6 +62,8 @@ def mode3():
 			print("Nathanaelle Poilane : " + reponse)
 			stockDataInUser(u)
 		else:
+			reponse = checkCava(text, u)
+		if reponse != "":
 			reponse = repliqueMode2(text, dico,smalltalk)
 			print("Nathanaelle Poilane : " + reponse)
 
@@ -104,11 +85,5 @@ if __name__=="__main__":
 		elif(mode == 3):
 			mode3();
 		elif(mode == 4):
-			testMathias();
-		elif(mode == 5):
-			testNathan();
-		elif(mode == 6):
-			testBrian();
-		else:
 			break;
 		mode = -1
