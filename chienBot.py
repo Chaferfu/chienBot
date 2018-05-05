@@ -104,6 +104,21 @@ def mode1():
 	calou()
 	return
 
+def repliqueMode2(text,dico,smalltalk):
+
+	themeDetecte, motDetecte = analyzeSentence(text, dico)
+	if themeDetecte == "no":
+		jeSuisDetecte, reponse = jeSuis(text)			
+		if jeSuisDetecte == "no":
+			reponse = random.choice(smalltalk)
+
+	else:
+		reponse = reaction(dico, themeDetecte, motDetecte)
+
+	return reponse
+
+
+
 def mode2():
 
 	smalltalk = read_word_list_file("mode2_hmmm")
@@ -138,6 +153,9 @@ def mode2():
 
 
 def mode3():
+	smalltalk = read_word_list_file("mode2_hmmm")
+	dico = stock_Words_And_Questions("mode2")
+
 	name = input("name pls :\n")
 	u = User(name)
 	if check_Connexion(name, "utilisateurs"):
@@ -151,8 +169,16 @@ def mode3():
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
-		print("Nathanaelle Poilane : " + reponse)
-	stockDataInUser(u)
+
+		if reponse != "":
+			print("Nathanaelle Poilane : " + reponse)
+			stockDataInUser(u)
+
+		else:
+			reponse = repliqueMode2(text, dico,smalltalk)
+			print("Nathanaelle Poilane : " + reponse)
+
+			
 	tmp = readDataFromUser(u)
 	tmp.printInformationUser()
 	return
