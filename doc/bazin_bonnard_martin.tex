@@ -34,12 +34,19 @@ Dans ce mode, Nathanaëlle cède la place à Calou, un adorable chien. Comme tou
 
 \subsection{Mode 2}
 
-Dans ce mode, Nathanaëlle est capable de tenir une conversation basique sur certains sujets : les animaux, la dépression, [...]. Elle est capable d'appliquer certaines règles de la langue française, notamment l'accord masculin/féminin/pluriel. De plus, elle répond aux phrases du style "Je suis X" par "Pourquoi es-tu X ?", et ce à tous les temps de l'indicatif, et même si X est précédé d'un quantifieur (très, trop...) ou d'un comparateur (plus, moins). Par exemple, la réponse à "Je serai très fatigué demain." sera "Pourquoi seras-tu fatigué ?".
+Dans ce mode, Nathanaëlle est capable de tenir une conversation basique sur certains sujets : les animaux, la dépression, et la mort. 
+
+\begin{center}
+\includegraphics{rhinopdauph.PNG}
+\end{center}
+
+\paragraph{} Elle est capable d'appliquer certaines règles de la langue française, notamment l'accord masculin/féminin/pluriel. De plus, elle répond aux phrases du style "Je suis X" par "Pourquoi es-tu X ?", et ce à tous les temps de l'indicatif, et même si X est précédé d'un quantifieur (très, trop...) ou d'un comparateur (plus, moins). Par exemple, la réponse à "Je serai très fatigué demain." sera "Pourquoi seras-tu fatigué ?".
 
 \subsection{Mode 3}
 
 Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des informations relatives à l'utilisateur. A la rédaction de ce rapport, le chatbot est capable de stocker le nom et le sexe de l'utilisateur, son humeur, les personnes qu'il connait ainsi que le lien qui les unit (soeur, ami...), les sports dont il parle, ce qu'il aime et ce qu'il n'aime pas. Lorsque l'utilisateur parle plusieurs fois d'une même chose (une passion, un ami...), Nathanaëlle le remarque et réagit à propos de celà.
 \begin{center}
+\includegraphics{carapuce.PNG}
 \end{center}
 \paragraph{} Nathanaëlle est d'un naturel très empathique. En effet, son humeur dépend énormément de celle de son interlocuteur. Ainsi, elle aura tendance à être de très bonne humeur si vous vous sentez bien, et plus inquiète dans le cas contraire. On peut le remarquer en lui demandant comment elle va.
 \begin{center}
@@ -49,8 +56,11 @@ Le mode 3 est le mode le plus complet. Le chatbot détecte et enregistre des inf
 \begin{center}
 \includegraphics{reload.PNG}
 \end{center}
-\paragraph{} 
 \paragraph{} L'utilisateur peut à tout moment consulter les informations que Nathanaelle a retenu en tapant "info".
+
+\subsection{Fonctionnement du programme}
+
+Le programme utilise une méthode de reconnaissance de mots-clés : il essaie de trouver dans les phrases de l'utilisateur des mots qui correspondent à des informations qu'il est capable d'enregistrer. Bien souvent, la position des mots dans la phrase n'a pas d'importance. Par exemple, Nathanaëlle comprendra aussi bien "J'ai une soeur qui s'appelle Cassandra." que "Cassandra est ma soeur." ou encore "Le nom de ma soeur est Cassandra." Les réponses de Nathanaëlle ont une base prédéfinie mais certaines peuvent être modifiées automatiquement pour s'ajuster à la conversation, par exemple pour reprendre des mots de la phrase de l'utilisateur ou pour s'accorder en genre et en nombre.
 
 \subsection{Pistes d'évolution}
 
@@ -73,7 +83,8 @@ création de la fonction check cohérence qui est très utilisé dans le mode 3 
 
 \paragraph{Mathias - Chaferfu} 
 \begin{itemize}
-\item ...
+\item Réalisation du mode 1 ;
+\item Réalisation de la majorité du mode 2.
 \end{itemize}
 
 \paragraph{Brian - userBrian} 
