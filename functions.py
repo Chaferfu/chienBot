@@ -183,7 +183,7 @@ def getInformationFromAnswer(answer, u):
 	u.addRelation(k,v)
 	k,v = check_Coherence(answer, "keySports")
 	u.addSport(k)
-	#checkMood(answer, u)
+	checkMood(answer, u)
 	with open("fichiersGouts", "r") as filepointer:
 		for line in filepointer.readlines():
 			line = line.split()
@@ -287,14 +287,7 @@ def removeQuantifiers(line):
 	for w in words:
 		print(w)
 		line = line.replace(str(w), "")
-	"""with open("quantifieurs", "r") as filepointer:
-		for word in filepointer.readlines():
-			if line.find(word) != -1:
-				print("found")
-			else:
-				print(":(")
-			line = line.replace(str(word), "")
-"""
+
 	return line
 
 # Renvoie une reponse plutot nulle et non constructive
