@@ -198,30 +198,65 @@ def jeSuis(line):
 	print(line)
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
 	if index  != -1:
-		reponse = "Pourquoi es-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi es-tu "
+		if line[index+8:index+12] == "plus":
+			reponse += "plus " + line[index+12:len(line)].split()[0] + " ?"
+		elif line[index+8:index+13] == "moins":
+			reponse += "moins " + line[index+13:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+8:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je serai ")
 	if index != -1:
-		reponse = "Pourquoi seras-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi seras-tu "
+		if line[index+9:index+13] == "plus":
+			reponse += "plus " + line[index+13:len(line)].split()[0] + " ?"
+		elif line[index+9:index+14] == "moins":
+			reponse += "moins " + line[index+14:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+9:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'étais ")
 	if index != -1:
-		reponse = "Pourquoi étais-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi étais-tu "
+		if line[index+8:index+12] == "plus":
+			reponse += "plus " + line[index+12:len(line)].split()[0] + " ?"
+		elif line[index+8:index+13] == "moins":
+			reponse += "moins " + line[index+13:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+8:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je fus ")
 	if index != -1:
-		reponse = "Pourquoi fus-tu " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi fus-tu "
+		if line[index+7:index+11] == "plus":
+			reponse += "plus " + line[index+11:len(line)].split()[0] + " ?"
+		elif line[index+7:index+12] == "moins":
+			reponse += "moins " + line[index+12:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+7:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'ai été ")
 	if index != -1:
-		reponse = "Pourquoi as-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi as-tu été "
+		if line[index+9:index+13] == "plus":
+			reponse += "plus " + line[index+13:len(line)].split()[0] + " ?"
+		elif line[index+9:index+14] == "moins":
+			reponse += "moins " + line[index+14:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+9:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	index = removePunctuation(removeQuantifiers(line.lower())).find("j'avais été' ")
 	if index != -1:
-		reponse = "Pourquoi avais-tu été " + line[index+8:len(line)].split()[0] + " ?"
+		reponse = "Pourquoi avais-tu été "
+		if line[index+11:index+15] == "plus":
+			reponse += "plus " + line[index+15:len(line)].split()[0] + " ?"
+		elif line[index+11:index+16] == "moins":
+			reponse += "moins " + line[index+16:len(line)].split()[0] + " ?"
+		else:
+			reponse += line[index+11:len(line)].split()[0] + " ?"
 		return "yes", reponse
 	return "no", ""
-
 
 # Cree une reponse de reaction quand le bot detecte un mot du dictionnaire
 def reaction(dictThemes, theme, mot):
@@ -271,7 +306,7 @@ def read_word_list_file(filename):
             wordlist.append(word)
     return wordlist
 
-# Retire tous les elements de pnctuation d'une chaine de caracteres
+# Retire tous les elements de ponctuation d'une chaine de caracteres
 def removePunctuation(line):
 	line = line.replace(',', '')
 	line = line.replace('.', '')
@@ -282,10 +317,10 @@ def removePunctuation(line):
 
 	return line
 
+# Retire tous les quantifieurs d'une chaine de caracteres
 def removeQuantifiers(line):
 	words = read_word_list_file("quantifieurs")
 	for w in words:
-		print(w)
 		line = line.replace(str(w), "")
 
 	return line
@@ -312,7 +347,7 @@ def stockDataInUser(user):
 	with open('Users/' + user.infos[0], "wb") as u:
 		pickle.dump(user, u, protocol = pickle.HIGHEST_PROTOCOL)
 
-#renvoie les mots & réponses contenues dans le fichier
+# Renvoie les mots & réponses contenues dans le fichier
 def stock_Words_And_Questions(filename):
 
 	dictThemes = {}
@@ -325,22 +360,10 @@ def stock_Words_And_Questions(filename):
 				key = line[0]
 				if key == '£':
 					theme = line[1:]
-					dictThemes[theme] = ([], [])			
+					dictThemes[theme] = ([], [])				
 			elif(key == '£'):
 	#			line = line.replace(' ', '')
 				dictThemes[theme][0].append(line.split('|'))
 			elif(key == '@'):
 				dictThemes[theme][1].append(line)
 	return dictThemes
-
-def getRandomPhraseFrom(filename, wordToChange, expressionToChange, wordToChange2 = None, expressionToChange2 = None):
-	phrase = []
-	with open(filename, "r") as filepointer:
-		for line in filepointer:
-			line = line.strip()
-			phrase.append(line)
-	finalPhrase = random.choice(phrase)
-	finalPhrase = finalPhrase.replace(expressionToChange, wordToChange)
-	if expressionToChange2 != None:
-		finalPhrase = finalPhrase.replace(expressionToChange2, wordToChange2)
-	return finalPhrase

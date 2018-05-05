@@ -5,7 +5,7 @@ import itertools
 class User:
 	
 	def __init__(self, prenom):
-		# infos : prénom, age, adresse
+		# infos : prénom, sexe, age
 		self.infos = []
 		self.infos.append(prenom)
 

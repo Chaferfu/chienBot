@@ -148,8 +148,6 @@ def mode3():
 		print("Enchanté ", name)
 	text = ""
 	while continuer(text):
-		temps = time()
-		checkAfk()
 		text = input("Moi                 : ")
 		reponse = ""
 		getInformationFromAnswer(text, u)
