@@ -8,6 +8,7 @@ from time import sleep
 import os
 import pickle
 import user
+# import ipdb
 
 def mode1():
 	calou()
@@ -15,6 +16,7 @@ def mode1():
 
 def repliqueMode2(text,dico,smalltalk):
 
+	# ipdb.set_trace()
 	themeDetecte, motDetecte = analyzeSentence(text, dico)
 	if themeDetecte == "no":
 		jeSuisDetecte, reponse = jeSuis(text)			
