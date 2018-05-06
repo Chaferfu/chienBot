@@ -279,10 +279,6 @@ def getInformationFromAnswer(answer, u):
 # et de l'éventuelle utilisation de quantifieurs ou de comparateurs.
 def jeSuis(line):
 	line = removeQuantifiers(line)
-<<<<<<< HEAD:src/functions.py
-	# print(line)
-=======
->>>>>>> 62bae011fb1d558ba232b754ee9b737e2e7df98b:functions.py
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
 	if index  != -1:
 		reponse = "Pourquoi es-tu "
