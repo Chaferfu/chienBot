@@ -2,33 +2,12 @@
 from functions import *
 from user import *
 import sys
-from random import randint, uniform
-import random 
-from time import sleep
-import os
-import pickle
-import user
-# import ipdb
+
+
 
 def mode1():
 	calou()
 	return
-
-def repliqueMode2(text,dico,smalltalk):
-
-	# ipdb.set_trace()
-	themeDetecte, motDetecte = analyzeSentence(text, dico)
-	if themeDetecte == "no":
-		jeSuisDetecte, reponse = jeSuis(text)			
-		if jeSuisDetecte == "no":
-			reponse = random.choice(smalltalk)
-
-	else:
-		reponse = reaction(dico, themeDetecte, motDetecte)
-
-	return reponse
-
-
 
 def mode2():
 
@@ -66,33 +45,38 @@ def mode3():
 	smalltalk = read_word_list_file("FichiersAnalyse/mode2_hmmm")
 	dico = stock_Words_And_Questions("FichiersAnalyse/mode2")
 
-	name = input("Entrez votre nom s'il vous plait. :\n")
+	name = input("Entrez votre nom s'il vous plait :\n")
 	u = User(name)
 	if check_Connexion(name, "utilisateurs"):
 		print("Oh content de te revoir", name)
 		u = readDataFromUser(u)
 	else:
 		print("Enchanté", name)
+		stockDataInUser(u)
 	text = ""
-	while continuer(text):
-		temps = time()
+	while True:
 		text = input("Moi                 : ")
 		reponse = ""
-		getInformationFromAnswer(text, u)
-		if text == "info":
-			u.printInformationUser()
-		if reponse != "":
-			print("Nathanaelle Poilane : " + reponse)
-			stockDataInUser(u)
+		if continuer(text):
+			getInformationFromAnswer(text, u)
+			if text == "info":
+				u.printInformationUser()		
+			if reponse != "":
+				print("Nathanaelle Poilane : " + reponse)
+				stockDataInUser(u)
+			else:
+				reponse = checkCava(text, u)
+				if reponse == "":
+					reponse = repliqueMode2(text, dico,smalltalk)
+				print("Nathanaelle Poilane : " + reponse)
 		else:
-			reponse = repliqueMode2(text, dico,smalltalk)
-			print("Nathanaelle Poilane : " + reponse)
+			print("Nathanaelle Poilane : A bientôt !")
+			break;
 
 	return
 
 if __name__=="__main__":
 	mode = int(sys.argv[1])
-	print(mode)
 
 	while(mode != 4):
 		while (mode < 0 or mode > 7): 
@@ -106,11 +90,5 @@ if __name__=="__main__":
 		elif(mode == 3):
 			mode3();
 		elif(mode == 4):
-			testMathias();
-		elif(mode == 5):
-			testNathan();
-		elif(mode == 6):
-			testBrian();
-		else:
 			break;
 		mode = -1
