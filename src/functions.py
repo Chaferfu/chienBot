@@ -267,7 +267,7 @@ def getInformationFromAnswer(answer, u):
 
 def jeSuis(line):
 	line = removeQuantifiers(line)
-	print(line)
+	# print(line)
 	index = removePunctuation(removeQuantifiers(line.lower())).find("je suis ")
 	if index  != -1:
 		reponse = "Pourquoi es-tu " + line[index+8:len(line)].split()[0] + " ?"
