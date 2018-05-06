@@ -3,4 +3,4 @@
 # par ex pour lancer mode 1 : python3 chienBot.py 1
 # ex utilisation mode 1 : dire 'salut calou !'
 #                     2 : dire " j'ai un rhinopithèque de Stryker"
-#                     3 : dire "J'aime Germain"
+#                     3 : dire "J'aime Germain" ou dire "info" pour avoir les infos relatives à l'utilisateur
